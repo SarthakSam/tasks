@@ -1,0 +1,48 @@
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+aside.side-menu {
+    width: 20vw;
+    /* display: none; */
+    position: fixed;
+    left: -100vw;
+    height: 100vh;
+    background: #0000ff;
+    transition: 150ms;
+}
+
+.list {
+    display: flex;
+    list-style: none;
+}
+
+ul.list li {
+    margin: 10px;
+}
+
+nav {
+    background-color: lightgray;
+}
+
+.side-menu-label {
+    font-size: 1.5rem;
+}
+
+.title {
+    font-size: 2rem;
+}
+
+.nav-list {
+    float: right;
+}
+
+#side-menu-btn {
+    /* display: none; */
+}
+
+#side-menu-btn:checked ~ aside.side-menu {
+    left: 0vw;
+}

@@ -12,11 +12,12 @@
 
 nav.navbar {
     background-color: var(--background-color);
-    line-height: 3rem;
+    /* line-height: 70px; */
     padding: 10px 20px;
     color: var(--color);
     border-bottom: 1px solid whitesmoke;
-    /* position: fixed; */
+    position: fixed;
+    width: 100vw;
     height: 70px;
 }
 
@@ -31,7 +32,18 @@ nav.navbar {
 
 .nav-list {
     float: right;
-    font-size: 1.4rem;
+    font-size: 1.6rem;
+    line-height: 4rem;
+}
+
+.nav-list .username {
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    line-height: 40px;  
+    text-align: center;
+    background-color: #41331c;
+    margin-top: 4px;
 }
 
 .title {
@@ -44,7 +56,7 @@ nav.navbar {
 }
 
 aside.sidebar {
-    width: 250px;
+    width: 70px;
     position: fixed;
     top: 70px;
 }
@@ -57,6 +69,7 @@ aside.sidebar ul {
 
 aside.sidebar ul li {
     padding: 15px;
+    padding-right: 25px;
     background-color:  rgba(50,60,70,1);
     list-style: none;
     transition: 500ms;
@@ -88,6 +101,10 @@ aside.sidebar ul li:hover span {
 
 #sidebar-btn {
     display: none;
+}
+
+#sidebar-btn:checked ~ aside.sidebar {
+    width: 250px;
 }
 
 #sidebar-btn:checked ~ aside.sidebar ul li span{

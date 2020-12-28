@@ -1,0 +1,10 @@
+section.container {
+    background-color: var(--background-color);
+    margin-left: 70px;
+    padding-top: 70px;
+}
+
+#sidebar-btn:checked ~ section.container {
+    margin-left: 250px;
+}
+

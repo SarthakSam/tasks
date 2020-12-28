@@ -13,7 +13,7 @@ let totalCardsCurrentlyInArow = 4;
 const verticalMarginBetCards = 10;
 
 function renderTasks(tasks) {
-    const tasksContainer = document.querySelector('.tasks')
+    const tasksContainer = document.querySelector('.notes')
     const fragment = document.createDocumentFragment();
     const tasksCardList = [];
     tasks.forEach( task => {
@@ -32,7 +32,7 @@ function renderTasks(tasks) {
 function adjustTaskCardToScreenSize(tasksCardList) {
     let noOfCardsInRow = totalCardsInRow;
     let margin = 10;
-    const container = document.querySelector('.tasks');
+    const container = document.querySelector('.notes');
     const containerRect = container.getBoundingClientRect();
     while( noOfCardsInRow * (taskCardWidth + margin) + margin > containerRect.width ) {
         noOfCardsInRow--;

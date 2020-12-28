@@ -12,11 +12,11 @@
 
 nav.navbar {
     background-color: var(--background-color);
+    position: fixed;
     /* line-height: 70px; */
     padding: 10px 20px;
     color: var(--color);
     border-bottom: 1px solid whitesmoke;
-    position: fixed;
     width: 100vw;
     height: 70px;
 }
@@ -59,6 +59,8 @@ aside.sidebar {
     width: 70px;
     position: fixed;
     top: 70px;
+    height: 100vh;
+    background-color: var(--background-color);
 }
 
 aside.sidebar ul {
@@ -109,9 +111,4 @@ aside.sidebar ul li:hover span {
 
 #sidebar-btn:checked ~ aside.sidebar ul li span{
     left: 60px;
-}
-
-section.notes {
-    background-color: var(--background-color);
-    height: 100vh;
 }

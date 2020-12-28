@@ -35,7 +35,7 @@ function adjustCardsToScreenSize(cardsList) {
     totalCardsCurrentlyInArow = noOfCardsInRow;     
     cardsList.forEach((task, index) => {
         if(index < noOfCardsInRow) {
-            task.style.top = verticalMarginBetCards + 'px';
+            task.style.top = verticalMarginBetCards + 60 + 'px';
         }
         else {
             const prevCard = cardsList[index - noOfCardsInRow].getBoundingClientRect();

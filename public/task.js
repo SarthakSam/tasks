@@ -1,20 +1,12 @@
-let notes = [
-    "study", 
-    "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem quasi officia magnam, unde voluptatibus voluptas aspernatur deserunt aut molestias est debitis fuga. Repellendus accusamus optio, quas recusandae ullam quibusdam quia?","netflix",
-     "football",
-      "bath",
-      "brush",
-       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem quasi officia magnam, unde voluptatibus voluptas aspernatur deserunt aut molestias est debitis fuga. Repellendus accusamus optio, quas recusandae ullam quibusdam quia?"
-]
 
 const infoCardWidth = 300;
 const totalCardsInRow = 4;
-const container = document.querySelector(".container");
+// const container = document.querySelector(".container");
 let totalCardsCurrentlyInArow = 4;
 const verticalMarginBetCards = 10;
 
 function renderCards(cards) {
-    const cardsContainer = document.querySelector('.notes')
+    const cardsContainer = document.querySelector('.container')
     const fragment = document.createDocumentFragment();
     const cardsList = [];
     cards.forEach( task => {
@@ -33,13 +25,11 @@ function renderCards(cards) {
 function adjustCardsToScreenSize(cardsList) {
     let noOfCardsInRow = totalCardsInRow;
     let margin = 10;
-    const container = document.querySelector('.notes');
+    const container = document.querySelector('.container');
     const containerRect = container.getBoundingClientRect();
     while( noOfCardsInRow * (infoCardWidth + margin) + margin > containerRect.width ) {
         noOfCardsInRow--;
     }
-    // if( noOfCardsInRow == totalCardsCurrentlyInArow)
-    //     return;
     let extraSpace = containerRect.width - noOfCardsInRow * (infoCardWidth + margin) - margin;
     margin += extraSpace/(noOfCardsInRow + 1); 
     totalCardsCurrentlyInArow = noOfCardsInRow;     
@@ -61,12 +51,15 @@ function adjustCardsToScreenSize(cardsList) {
         }
     });
 }
-let cardsList = renderCards(notes);
-window.addEventListener('resize', () => {
-    adjustCardsToScreenSize(cardsList)
-});
 
-document.querySelector("#sidebar-btn").addEventListener("click", () => {
-    adjustCardsToScreenSize(cardsList)
-})
-
+function renderData(data) {
+    let cardsList = renderCards(data);
+    window.addEventListener('resize', () => {
+        adjustCardsToScreenSize(cardsList)
+    });
+    
+    document.querySelector("#sidebar-btn").addEventListener("click", () => {
+        adjustCardsToScreenSize(cardsList)
+    })
+    
+}

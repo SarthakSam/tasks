@@ -68,6 +68,10 @@ aside.sidebar ul li {
     border-radius: 0 50px 50px 0;
 }
 
+aside.sidebar ul li.active {
+    background-color: #41331c;
+}
+
 aside.sidebar ul li * {
     padding: 0 10px;
 }

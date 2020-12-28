@@ -1,13 +1,11 @@
 
-.tasks {
-    width: 80vw;
-    border: 2px solid red;
-    /* position: relative; */
+.notes {
+    position: relative;
 }
 
-.task {
+.info-card {
     background-color: aqua;
     /* margin: 10px; */
-    /* position: absolute; */
+    position: absolute;
     padding: 10px;
 }

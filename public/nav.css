@@ -11,7 +11,7 @@
 }
 
 nav.navbar {
-    background-color: var(--background-color);
+    /* background-color: var(--background-color); */
     position: fixed;
     /* line-height: 70px; */
     padding: 10px 20px;
@@ -60,7 +60,7 @@ aside.sidebar {
     position: fixed;
     top: 70px;
     height: 100vh;
-    background-color: var(--background-color);
+    /* background-color: var(--background-color); */
 }
 
 aside.sidebar ul {

@@ -1,4 +1,4 @@
-let tasks = [
+let notes = [
     "study", 
     "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem quasi officia magnam, unde voluptatibus voluptas aspernatur deserunt aut molestias est debitis fuga. Repellendus accusamus optio, quas recusandae ullam quibusdam quia?","netflix",
      "football",
@@ -7,60 +7,66 @@ let tasks = [
        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem quasi officia magnam, unde voluptatibus voluptas aspernatur deserunt aut molestias est debitis fuga. Repellendus accusamus optio, quas recusandae ullam quibusdam quia?"
 ]
 
-const taskCardWidth = 300;
+const infoCardWidth = 300;
 const totalCardsInRow = 4;
+const container = document.querySelector(".container");
 let totalCardsCurrentlyInArow = 4;
 const verticalMarginBetCards = 10;
 
-function renderTasks(tasks) {
-    const tasksContainer = document.querySelector('.notes')
+function renderCards(cards) {
+    const cardsContainer = document.querySelector('.notes')
     const fragment = document.createDocumentFragment();
-    const tasksCardList = [];
-    tasks.forEach( task => {
+    const cardsList = [];
+    cards.forEach( task => {
         const div = document.createElement('div');
         div.innerHTML = task;
-        div.classList.add("task");
-        div.style.width = `${taskCardWidth}px`;
-        tasksCardList.push(div);
+        div.classList.add("info-card");
+        div.style.width = `${infoCardWidth}px`;
+        cardsList.push(div);
         fragment.appendChild(div);
     })
-    tasksContainer.appendChild(fragment)
-    adjustTaskCardToScreenSize(tasksCardList);
-    return tasksCardList;
+    cardsContainer.appendChild(fragment)
+    adjustCardsToScreenSize(cardsList);
+    return cardsList;
 }
 
-function adjustTaskCardToScreenSize(tasksCardList) {
+function adjustCardsToScreenSize(cardsList) {
     let noOfCardsInRow = totalCardsInRow;
     let margin = 10;
     const container = document.querySelector('.notes');
     const containerRect = container.getBoundingClientRect();
-    while( noOfCardsInRow * (taskCardWidth + margin) + margin > containerRect.width ) {
+    while( noOfCardsInRow * (infoCardWidth + margin) + margin > containerRect.width ) {
         noOfCardsInRow--;
     }
     // if( noOfCardsInRow == totalCardsCurrentlyInArow)
     //     return;
-    let extraSpace = containerRect.width - noOfCardsInRow * (taskCardWidth + margin) - margin;
+    let extraSpace = containerRect.width - noOfCardsInRow * (infoCardWidth + margin) - margin;
     margin += extraSpace/(noOfCardsInRow + 1); 
     totalCardsCurrentlyInArow = noOfCardsInRow;     
-    tasksCardList.forEach((task, index) => {
+    cardsList.forEach((task, index) => {
         if(index < noOfCardsInRow) {
             task.style.top = verticalMarginBetCards + 'px';
         }
         else {
-            const top = tasksCardList[index - noOfCardsInRow].getBoundingClientRect().bottom - containerRect.top + verticalMarginBetCards;
+            const prevCard = cardsList[index - noOfCardsInRow].getBoundingClientRect();
+            const top = prevCard.bottom - containerRect.top + verticalMarginBetCards;
             task.style.top = `${top}px`;
         }
         if(index % noOfCardsInRow == 0) {
             task.style.left = `${margin}px`;
         }
         else {
-            const left = tasksCardList[index - 1].getBoundingClientRect().right - containerRect.left + margin;
+            const left = cardsList[index - 1].getBoundingClientRect().right - containerRect.left + margin;
             task.style.left = `${left}px`;
         }
     });
 }
-let tasksCardList = renderTasks(tasks);
+let cardsList = renderCards(notes);
 window.addEventListener('resize', () => {
-    adjustTaskCardToScreenSize(tasksCardList)
+    adjustCardsToScreenSize(cardsList)
 });
+
+document.querySelector("#sidebar-btn").addEventListener("click", () => {
+    adjustCardsToScreenSize(cardsList)
+})
 

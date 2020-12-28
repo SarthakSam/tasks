@@ -110,3 +110,8 @@ aside.sidebar ul li:hover span {
 #sidebar-btn:checked ~ aside.sidebar ul li span{
     left: 60px;
 }
+
+section.notes {
+    background-color: var(--background-color);
+    height: 100vh;
+}

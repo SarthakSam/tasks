@@ -1,3 +1,16 @@
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    font-family: monospace;
+}
+
+:root {
+    --background-color:#1F2937;
+    --color: #DBEAFE;
+    --card-color: #A7F3D0; 
+}
+
 body {
     background-color: var(--background-color);
 }

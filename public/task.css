@@ -4,8 +4,7 @@
 }
 
 .info-card {
-    background-color: aqua;
-    /* margin: 10px; */
+    background-color: var(--card-color);
     position: absolute;
     padding: 10px;
 }

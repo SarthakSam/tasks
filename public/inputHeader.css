@@ -41,6 +41,10 @@ section.container header.input-header .input-tab > p {
     outline: none;
 }
 
+section.container header.input-header .input-tab > p.description {
+    display: none;
+}
+
 /* section.container header.input-header .input-tab span {
     margin: 15px 10px;
     outline: none;
@@ -91,14 +95,10 @@ section.container header.input-header .input-tab .buttons-tray .btn-right:hover 
 }
 
 section.container header.input-header .input-tab ul.input-list {
-    /* display: none; */
+    display: none;
     margin: 15px 0;
     font-size: 1.2rem;
     list-style: none;
-}
-
-section.container header.input-header .input-tab ul.input-list li.list-item{
-    /* display: none; */
 }
 
 section.container header.input-header .input-tab ul.input-list li.list-item i.fa-plus {
@@ -106,11 +106,12 @@ section.container header.input-header .input-tab ul.input-list li.list-item i.fa
     font-size: 1rem;
     float: left;
     margin: 0 10px 0 20px;  
+    padding: 5px 0;
 }
 
 section.container header.input-header .input-tab ul.input-list li.list-item  p {
     /* display: inline-block; */
-    padding: 0 0 0 40px;
+    padding: 5px 0 5px 40px;
 }
 
 section.container header.input-header .input-tab ul.input-list li.list-item  p:empty::before{

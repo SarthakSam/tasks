@@ -9,7 +9,8 @@
     --background-color:#23272e;
     --color: #DBEAFE;
     --card-color: #A7F3D0; 
-    --placeholder-text-color: #68696a;
+    --placeholder-text-color: #6e6f71;
+    --icons-color:  #b0b2b6;
 }
 
 body {
@@ -36,7 +37,8 @@ section.container main.notes {
 
 section.container header.input-header {
     border: 0.5px solid var(--placeholder-text-color);
-    min-width: 200px;
+    min-width: 300px;
+    box-sizing: border-box;
     width: 50vw;
     margin: auto;
     margin-top: 10px;
@@ -51,14 +53,18 @@ section.container header.input-header {
     display: block;
 } */
 
-section.container header.input-header .list-icon {
+section.container header.input-header .list-icon-right {
     float: right;
-    margin-right: 15px;
+    margin-right: 20px;
+    display: block;
+    color: var(--icons-color);
+    font-size: 1.1rem;
     /* font-size: 2rem; */
 }
 
 section.container header.input-header .input-tab {
     display: none;
+    overflow: auto;
 }
 
 section.container header.input-header .input-tab-btn {
@@ -70,8 +76,14 @@ section.container header.input-header .input-tab p {
     outline: none;
 }
 
+/* section.container header.input-header .input-tab span {
+    margin: 15px 10px;
+    outline: none;
+} */
+
 section.container header.input-header .input-tab p.title:empty::before {
     content: "Title";
+    /* width: 200px; */
     color: var(--placeholder-text-color);
 }
 
@@ -79,3 +91,35 @@ section.container header.input-header .input-tab p.description:empty::before {
     content: "Take a note...";
     color: var(--placeholder-text-color);
 }
+
+section.container header.input-header .input-tab .buttons-tray {
+    color: var(--icons-color);
+    font-size: 1.1rem;
+    /* justify-content: space-between; */
+    margin: 0 10px;
+}
+
+section.container header.input-header .input-tab .buttons-tray ul {
+    /* display: flex; */
+    list-style: none;
+    display: inline;
+}
+
+section.container header.input-header .input-tab .buttons-tray ul li {
+    padding: 10px 20px;
+    display: inline-block;
+}
+
+section.container header.input-header .input-tab .buttons-tray .btn-right {
+    padding: 10px 10px;
+    border: none;
+    color: var(--icons-color);
+    background-color: inherit;
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+/* section.container header.input-header .input-tab .btn-right {
+    
+} */
+

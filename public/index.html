@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="nav.css">
     <link rel="stylesheet" href="index.css">
     <link rel="stylesheet" href="card.css">
+    <link rel="stylesheet" href="inputHeader.css">
 </head>
 <body>
     <input type="checkbox" id="sidebar-btn" checked>
@@ -61,13 +62,19 @@
         <header class="input-header">
             <div class="input-tab-btn">
                 <span>Take a note...</span>
-                <i class="far fa-image list-icon-right" aria-hidden="true" title="Add List"></i>
-                <i class="fa fa-check-square list-icon-right" aria-hidden="true" title="Add Image"></i>
+                <i class="far fa-image list-icon-right" id="image-button" aria-hidden="true" title="Add List"></i>
+                <i class="fa fa-check-square list-icon-right" id="list-button" aria-hidden="true" title="Add Image"></i>
             </div>
             <div class="input-tab">
                 <i class="fas fa-thumbtack list-icon-right"></i>
                 <p contenteditable class="title"></p>
                 <p contenteditable class="description"></p>
+                <ul class="input-list">
+                    <li class="list-item">
+                        <i class="fa fa-plus"></i>
+                        <p contenteditable></p>
+                    </li>
+                </ul>
                 <div class="buttons-tray">
                     <ul>
                         <li>

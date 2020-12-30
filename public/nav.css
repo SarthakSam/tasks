@@ -35,7 +35,7 @@ nav.navbar {
     margin-top: 4px;
 }
 
-.title {
+nav label.title {
     font-size: 3rem;
     font-weight: 800;
 }

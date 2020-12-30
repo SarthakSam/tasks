@@ -6,9 +6,10 @@
 }
 
 :root {
-    --background-color:#1F2937;
+    --background-color:#23272e;
     --color: #DBEAFE;
     --card-color: #A7F3D0; 
+    --placeholder-text-color: #68696a;
 }
 
 body {
@@ -24,29 +25,6 @@ section.container {
     height: calc(100vh - 70px);
 }
 
-section.container header.input-tab {
-    border: 0.5px solid white;
-    height: 50px;
-    min-width: 200px;
-    width: 50vw;
-    margin: auto;
-    margin-top: 10px;
-    color: var(--color);
-    padding: 10px;
-    border-radius: 15px;
-    font-size: 1.6rem;
-}
-
-/* section.container header.input-tab span {
-    font-size: 2rem;
-} */
-
-section.container header.input-tab .list-icon {
-    float: right;
-    margin-right: 10px;
-    /* font-size: 2rem; */
-}
-
 #sidebar-btn:checked ~ section.container {
     left: 250px;
     width: calc(100vw - 250px);
@@ -54,4 +32,50 @@ section.container header.input-tab .list-icon {
 
 section.container main.notes {
     position: relative;
+}
+
+section.container header.input-header {
+    border: 0.5px solid var(--placeholder-text-color);
+    min-width: 200px;
+    width: 50vw;
+    margin: auto;
+    margin-top: 10px;
+    color: var(--color);
+    padding: 10px;
+    border-radius: 10px;
+    font-size: 1.3rem;
+}
+
+/* section.container header.input-header .input-tab-btn {
+    height: 50px;
+    display: block;
+} */
+
+section.container header.input-header .list-icon {
+    float: right;
+    margin-right: 15px;
+    /* font-size: 2rem; */
+}
+
+section.container header.input-header .input-tab {
+    display: none;
+}
+
+section.container header.input-header .input-tab-btn {
+    color: var(--placeholder-text-color);
+}
+
+section.container header.input-header .input-tab p {
+    margin: 15px 10px;
+    outline: none;
+}
+
+section.container header.input-header .input-tab p.title:empty::before {
+    content: "Title";
+    color: var(--placeholder-text-color);
+}
+
+section.container header.input-header .input-tab p.description:empty::before {
+    content: "Take a note...";
+    color: var(--placeholder-text-color);
 }

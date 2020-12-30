@@ -6,7 +6,7 @@ let totalCardsCurrentlyInArow = 4;
 const verticalMarginBetCards = 10;
 
 function renderCards(cards) {
-    const cardsContainer = document.querySelector('.container')
+    const cardsContainer = document.querySelector('.container main')
     const fragment = document.createDocumentFragment();
     const cardsList = [];
     cards.forEach( task => {
@@ -25,7 +25,7 @@ function renderCards(cards) {
 function adjustCardsToScreenSize(cardsList) {
     let noOfCardsInRow = totalCardsInRow;
     let margin = 10;
-    const container = document.querySelector('.container');
+    const container = document.querySelector('.container main');
     const containerRect = container.getBoundingClientRect();
     while( noOfCardsInRow * (infoCardWidth + margin) + margin > containerRect.width ) {
         noOfCardsInRow--;
@@ -35,7 +35,7 @@ function adjustCardsToScreenSize(cardsList) {
     totalCardsCurrentlyInArow = noOfCardsInRow;     
     cardsList.forEach((task, index) => {
         if(index < noOfCardsInRow) {
-            task.style.top = verticalMarginBetCards + 60 + 'px';
+            task.style.top = verticalMarginBetCards + verticalMarginBetCards + 'px';
         }
         else {
             const prevCard = cardsList[index - noOfCardsInRow].getBoundingClientRect();

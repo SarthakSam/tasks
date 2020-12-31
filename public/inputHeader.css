@@ -19,6 +19,7 @@ section.container header.input-header {
 section.container header.input-header .list-icon-right {
     float: right;
     margin-right: 20px;
+    padding: 0 5px;
     display: block;
     color: var(--icons-color);
     font-size: 1.1rem;
@@ -129,6 +130,7 @@ section.container header.input-header .input-tab  div.images-section form {
 
 section.container header.input-header .input-tab  div.images-section form > label.upload-btn {
     font-size: 2rem;
+    display: none;
 }
 
 section.container header.input-header .input-tab  div.images-section ul.uploaded-images-list {

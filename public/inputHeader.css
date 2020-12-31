@@ -118,3 +118,32 @@ section.container header.input-header .input-tab ul.input-list li.list-item  p:e
     content: "List item";
     color: var(--placeholder-text-color);
 }
+
+section.container header.input-header .input-tab  div.images-section {
+    margin: 10px;
+}
+
+section.container header.input-header .input-tab  div.images-section form {
+    text-align: center;
+}
+
+section.container header.input-header .input-tab  div.images-section form > label.upload-btn {
+    font-size: 2rem;
+}
+
+section.container header.input-header .input-tab  div.images-section ul.uploaded-images-list {
+    display: flex;
+    flex-wrap: wrap;
+    list-style: none;
+}
+
+section.container header.input-header .input-tab  div.images-section ul.uploaded-images-list li {
+    padding: 10px;
+    border: 1px solid var(--placeholder-text-color);
+    margin: 10px;
+}
+
+section.container header.input-header .input-tab  div.images-section ul.uploaded-images-list li img.uploaded-image {
+    width: 200px;
+    height: 200px;
+}

@@ -141,6 +141,8 @@ function  addList() {
         descriptionContainer.innerText = "";
         descriptionContainer.style.display = "none";
         listContainer.innerHTML = "";
+        uploadBtnLabel.style.display = "none";
+        uploadedImagesList.innerHTML = ""
         addListItem();
         listContainer.style.display = "inherit";
 }

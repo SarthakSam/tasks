@@ -76,9 +76,36 @@ section.container header.input-header .input-tab .buttons-tray ul {
     display: inline;
 }
 
-section.container header.input-header .input-tab .buttons-tray ul li {
+section.container header.input-header .input-tab .buttons-tray ul.buttons-list > li {
     padding: 10px 20px;
     display: inline-block;
+    cursor: pointer;
+}
+
+section.container header.input-header .input-tab .buttons-tray ul li.color-btn ul.color-palette {
+    position: absolute;
+    display: none;
+    width: 140px;
+    flex-wrap: wrap;
+    background-color: var(--background-color);
+    z-index: 1;
+}
+
+section.container header.input-header .input-tab .buttons-tray ul li.color-btn ul.color-palette li.color {
+    box-sizing: border-box;
+    margin: 5px;
+    width: 25px;
+    height: 25px;
+    border-radius: 25px;
+    cursor: pointer;
+}
+
+section.container header.input-header .input-tab .buttons-tray ul.buttons-list li.color-btn i:hover ~ ul.color-palette {
+    display: flex;
+}
+
+section.container header.input-header .input-tab .buttons-tray ul.buttons-list li.color-btn ul.color-palette:hover {
+    display: flex;
 }
 
 section.container header.input-header .input-tab .buttons-tray .btn-right {

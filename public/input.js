@@ -13,6 +13,7 @@ const uploadedImagesList = document.querySelector("section.container header.inpu
 const titleContainer = document.querySelector("section.container header.input-header .input-tab > p");
 const buttonsTray = document.querySelector("section.container header.input-header .input-tab .buttons-tray ul");
 const addNotesBtn = document.querySelector("section.container header.input-header .input-tab .buttons-tray div > button.addNote-btn");
+const closeInputTabBtn = document.querySelector("section.container header.input-header .input-tab .buttons-tray div > button.close-input-tab");
 const colorPalette = document.querySelector("section.container header.input-header .input-tab .buttons-tray ul.buttons-list li.color-btn > ul.color-palette");
 
 const buttonsTrayFunctions = {
@@ -29,7 +30,7 @@ inputBtn.style.display = "inherit";
 inputTab.style.display = "none";
 
 document.addEventListener('click', (event) => {
-    if( inputHeader.contains(event.target) ) {
+    if( inputHeader.contains(event.target) && event.target != closeInputTabBtn ) {
             if( inputTab.style.display == "none") {
                 inputTab.style.display = "inherit";
                 inputBtn.style.display = "none";
@@ -48,13 +49,18 @@ document.addEventListener('click', (event) => {
 
     } 
     else {
-            clearDisplay();
-            inputBtn.style.display = "inherit";
-            inputTab.style.display = "none";
+        closeInputTab();
         //     resetInputTab();
     }
-    
 })
+
+function closeInputTab() {
+        clearDisplay();
+        inputBtn.style.display = "inherit";
+        // if(inputTab)
+        inputTab.style.backgroundColor = "";
+        inputTab.style.display = "none";
+}
 
 function clearDisplay() {
         listContainer.style.display = "none";
@@ -160,13 +166,19 @@ colorPalette.addEventListener('click', (event) => {
 })
 
 addNotesBtn.onclick = () => {
-       console.log();
-       console.log();
-       console.log(listContainer.childNodes);
+       const lisList = Array.prototype.slice.call(listContainer.childNodes);
+       lisList.splice(-1);
+       let list = [];
+       lisList.forEach(li => {
+               list.push(li.innerText);
+       })
        const note = new Note();
        note.setVal('title', titleContainer.innerText);
        note.setVal('description', descriptionContainer.innerText); 
        note.setVal('backgroundColor',inputTab.style.backgroundColor);
+       note.setVal('list', list);
        console.log(note); 
 //        console.log(uploadedImagesList)
 }
+
+closeInputTabBtn.onclick = closeInputTab;

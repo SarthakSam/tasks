@@ -1,3 +1,5 @@
+import Note from '../note.js';
+
 const inputHeader = document.querySelector("section.container header.input-header");
 const inputBtn = document.querySelector("section.container header.input-header .input-tab-btn");
 const inputTab = document.querySelector("section.container header.input-header .input-tab");
@@ -10,6 +12,8 @@ const uploadBtnLabel = document.querySelector("section.container header.input-he
 const uploadedImagesList = document.querySelector("section.container header.input-header .input-tab div.images-section ul.uploaded-images-list");
 const titleContainer = document.querySelector("section.container header.input-header .input-tab > p");
 const buttonsTray = document.querySelector("section.container header.input-header .input-tab .buttons-tray ul");
+const addNotesBtn = document.querySelector("section.container header.input-header .input-tab .buttons-tray div > button.addNote-btn");
+const colorPalette = document.querySelector("section.container header.input-header .input-tab .buttons-tray ul.buttons-list li.color-btn > ul.color-palette");
 
 const buttonsTrayFunctions = {
         notify,
@@ -149,4 +153,20 @@ function  addList() {
 
 function  showOptions() {
         console.log("ptiions")
+}
+
+colorPalette.addEventListener('click', (event) => {
+      inputTab.style.backgroundColor = event.target.style.backgroundColor;
+})
+
+addNotesBtn.onclick = () => {
+       console.log();
+       console.log();
+       console.log(listContainer.childNodes);
+       const note = new Note();
+       note.setVal('title', titleContainer.innerText);
+       note.setVal('description', descriptionContainer.innerText); 
+       note.setVal('backgroundColor',inputTab.style.backgroundColor);
+       console.log(note); 
+//        console.log(uploadedImagesList)
 }

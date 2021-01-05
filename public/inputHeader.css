@@ -30,6 +30,7 @@ section.container header.input-header .input-tab {
     display: none;
     overflow: auto;
     padding-top: 15px;
+    background-color: var(--background-color);
 }
 
 section.container header.input-header .input-tab-btn {

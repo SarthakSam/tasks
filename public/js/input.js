@@ -1,4 +1,4 @@
-import Note from '../note.js';
+import Note from './note.js';
 
 const inputHeader = document.querySelector("section.container header.input-header");
 const inputBtn = document.querySelector("section.container header.input-header .input-tab-btn");

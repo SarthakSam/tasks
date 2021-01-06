@@ -2,7 +2,7 @@
 nav.navbar {
     background-color: var(--background-color);
     position: fixed;
-    line-height: 40px;
+    line-height: 50px;
     padding: 10px 20px;
     color: var(--color);
     border-bottom: 1px solid whitesmoke;
@@ -37,8 +37,8 @@ nav.navbar {
 }
 
 nav label.title {
-    font-size: 3rem;
-    font-weight: 800;
+    font-size: 2rem;
+    font-weight: 700;
 }
 
 .sidebar-btn-label {

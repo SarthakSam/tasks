@@ -22,7 +22,7 @@ section.container header.input-header .list-icon-right {
     padding: 0 5px;
     display: block;
     color: var(--icons-color);
-    font-size: 1.1rem;
+    font-size: 1.5rem;
     /* font-size: 2rem; */
 }
 
@@ -39,7 +39,7 @@ section.container header.input-header .input-tab-btn {
 }
 
 section.container header.input-header .input-tab > p {
-    margin: 15px 15px;
+    margin: 10px 15px;
     outline: none;
 }
 
@@ -90,6 +90,8 @@ section.container header.input-header .input-tab .buttons-tray ul li.color-btn u
     flex-wrap: wrap;
     background-color: var(--background-color);
     z-index: 1;
+    margin-left: -5px;
+    margin-top: -5px;
 }
 
 section.container header.input-header .input-tab .buttons-tray ul li.color-btn ul.color-palette li.color {

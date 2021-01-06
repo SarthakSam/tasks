@@ -1,4 +1,5 @@
 import Note from './note.js';
+import {saveNote} from './index.js';
 
 const inputHeader = document.querySelector("section.container header.input-header");
 const inputBtn = document.querySelector("section.container header.input-header .input-tab-btn");
@@ -177,7 +178,8 @@ addNotesBtn.onclick = () => {
        note.setVal('description', descriptionContainer.innerText); 
        note.setVal('backgroundColor',inputTab.style.backgroundColor);
        note.setVal('list', list);
-       console.log(note); 
+       saveNote(note);
+       closeInputTab();
 //        console.log(uploadedImagesList)
 }
 

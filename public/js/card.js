@@ -7,6 +7,7 @@ const verticalMarginBetCards = 10;
 
 function renderCards(cards) {
     const cardsContainer = document.querySelector('.container main')
+    cardsContainer.innerHTML = ""; 
     const fragment = document.createDocumentFragment();
     const cardsList = [];
     cards.forEach( task => {
@@ -46,6 +47,7 @@ function createTaskCard( task ) {
         });
         div.appendChild(ul)
     }
+    div.style.backgroundColor = task.backgroundColor;
     div.classList.add("info-card");
     return div;
 }

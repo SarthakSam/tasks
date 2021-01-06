@@ -221,14 +221,20 @@ addNotesBtn.onclick = () => {
        lisList.forEach(li => {
                list.push(li.innerText);
        })
+       const imagesList = Array.prototype.slice.call(uploadedImagesList.children);
+       let images = []
+       for(let uploadedImage of imagesList ) {
+                images.push( uploadedImage.children[0].src);
+       }
+
        const note = new Note();
        note.setVal('title', titleContainer.innerText);
        note.setVal('description', descriptionContainer.innerText); 
        note.setVal('backgroundColor',inputTab.style.backgroundColor);
        note.setVal('list', list);
+       note.setVal('images', images);
        saveNote(note);
        closeInputTab();
-//        console.log(uploadedImagesList)
 }
 
 closeInputTabBtn.onclick = closeInputTab;

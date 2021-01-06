@@ -2,7 +2,7 @@
 nav.navbar {
     background-color: var(--background-color);
     position: fixed;
-    /* line-height: 70px; */
+    line-height: 40px;
     padding: 10px 20px;
     color: var(--color);
     border-bottom: 1px solid whitesmoke;
@@ -23,7 +23,7 @@ nav.navbar {
 .nav-list {
     float: right;
     font-size: 1.6rem;
-    line-height: 4rem;
+    line-height: 55px;
 }
 
 .nav-list .username {

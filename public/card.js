@@ -10,16 +10,44 @@ function renderCards(cards) {
     const fragment = document.createDocumentFragment();
     const cardsList = [];
     cards.forEach( task => {
-        const div = document.createElement('div');
-        div.innerHTML = task;
-        div.classList.add("info-card");
-        div.style.width = `${infoCardWidth}px`;
-        cardsList.push(div);
-        fragment.appendChild(div);
+        const taskDiv = createTaskCard( task );
+        // const div = document.createElement('div');
+        // div.innerHTML = task;
+        // div.classList.add("info-card");
+        taskDiv.style.width = `${infoCardWidth}px`;
+        cardsList.push(taskDiv);
+        fragment.appendChild(taskDiv);
     })
     cardsContainer.appendChild(fragment)
     adjustCardsToScreenSize(cardsList);
     return cardsList;
+}
+
+function createTaskCard( task ) {
+    const div = document.createElement('div');
+    if(task.title) {
+        const title = document.createElement('p');
+        title.innerText = task.title
+        title.classList.add('title');
+        div.appendChild(title);
+    }
+    if(task.description) {
+        const description = document.createElement('p');
+        description.innerText = task.description
+        description.classList.add('description');
+        div.appendChild(description)
+    }
+    if(task.list && task.list.length > 0) {
+        const ul = document.createElement("ul");
+        task.list.forEach( task => {
+            const li = document.createElement("li");
+            li.innerText = task;
+            ul.appendChild(li);
+        });
+        div.appendChild(ul)
+    }
+    div.classList.add("info-card");
+    return div;
 }
 
 function adjustCardsToScreenSize(cardsList) {

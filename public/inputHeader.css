@@ -140,7 +140,7 @@ section.container header.input-header .input-tab ul.input-list li.list-item i.fa
 
 section.container header.input-header .input-tab ul.input-list li.list-item  p {
     /* display: inline-block; */
-    padding: 5px 0 5px 40px;
+    padding: 0 0 5px 40px;
 }
 
 section.container header.input-header .input-tab ul.input-list li.list-item  p:empty::before{

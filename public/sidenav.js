@@ -12,18 +12,3 @@ function removeClass(list, className) {
         element.classList.remove(className);
     });
 }
-
-function getData(page) {
-    let notes = [
-        "study", 
-        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem quasi officia magnam, unde voluptatibus voluptas aspernatur deserunt aut molestias est debitis fuga. Repellendus accusamus optio, quas recusandae ullam quibusdam quia?","netflix",
-         "football",
-          "bath",
-          "brush",
-           "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem quasi officia magnam, unde voluptatibus voluptas aspernatur deserunt aut molestias est debitis fuga. Repellendus accusamus optio, quas recusandae ullam quibusdam quia?"
-    ]
-    renderData(notes);
-
-}
-
-getData();

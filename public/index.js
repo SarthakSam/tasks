@@ -1,0 +1,36 @@
+function getData(page) {
+    let notes = [
+        {
+            backgroundColor: "",
+            description: "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Adipisci nisi soluta libero animi consequuntur repellat error veniam aperiam aliquam ipsa, incidunt reiciendis qui quaerat, nostrum magni illum sequi vitae sunt.",
+            images: [],
+            list: ["abjcbvw ", "bwveve", "cwwvwvw", "dcwcw"],
+            title: "first"
+        }, 
+        {
+            backgroundColor: "",
+            description: "tur repellat error veniam aperiam aliquam ipsa, incidunt r",
+            images: [],
+            list: ["a", "b", "c", "d"],
+            title: "second"
+        },
+        {
+            backgroundColor: "",
+            description: "tur repellat error veniam aperiam aliquam ipsa, incidunt r",
+            images: [],
+            list: ["a", "b", "c", "d"],
+            title: "lorem30"
+        },
+        {
+            backgroundColor: "",
+            description: "",
+            images: [],
+            list: ["a", "b", "c", "d"],
+            title: "first"
+        },
+    ]
+    renderData(notes);
+
+}
+
+getData();

@@ -3,8 +3,31 @@
     position: relative;
 }
 
-.info-card {
-    background-color: var(--card-color);
+.notes .info-card {
+    /* background-color: var(--card-color); */
+    color: var(--color);
+    border: 1px solid var(--placeholder-text-color);
+    border-radius: 10px;
     position: absolute;
-    padding: 10px;
+    padding: 15px;
+    font-size: 0.9rem;
+    font-weight: 300;
+}
+
+.notes .info-card p.title {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin: 10px 0;
+}
+
+.notes .info-card p.description {
+    margin: 10px 0;
+}
+
+.notes .info-card > ul {
+    list-style: none;
+}
+
+.notes .info-card ul > li {
+    padding: 5px 10px;
 }

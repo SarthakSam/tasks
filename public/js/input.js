@@ -96,7 +96,6 @@ function addDescription() {
 }
 
 uploadBtn.onchange = (event) => {
-        console.log("uloaded");
         readURL(event.target)
 }
 
@@ -105,7 +104,7 @@ function readURL(input) {
                 var reader = new FileReader();
                 
                 reader.onload = function(e) {
-                        console.log(e.target.result);
+                        // console.log(e.target.result);
                         const imageContainer = document.createElement("li");
                         const image = document.createElement("img");
                         image.setAttribute('src', e.target.result);
@@ -115,6 +114,16 @@ function readURL(input) {
                 }
                 
                 reader.readAsDataURL(input.files[0]); // convert to base64 string
+
+                fetch(
+                        "http://localhost:3000/note", {
+                        body: input.files[0],
+                        method: 'POST',
+                        headers: {
+                                'Content-Type': 'application/x-www-form-urlencoded'
+                                }
+                        }
+                        ).then( res => res.text()).then( resp => console.log(resp))
         }
 }        
 

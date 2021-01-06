@@ -46,3 +46,15 @@ function init() {
 }
 
 init();
+
+// function getDataFromBackend() {
+//     fetch(
+//         "http://localhost:3000/note", {
+//             body: JSON.stringify({name: "Sam" }),
+//             method: 'POST',
+                // headers: {
+                //     'Content-Type': 'application/json'
+                // }
+//         }
+//     ).then( res => res.text()).then( resp => console.log(resp))
+// }

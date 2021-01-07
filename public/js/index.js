@@ -34,10 +34,19 @@ function getNotes() {
 }
 
 export function saveNote(note) {
-    let notes = getNotes();
-    notes.push(note);
-    localStorage.setItem('notes', JSON.stringify(notes) );
-    init();
+    // let notes = getNotes();
+    // notes.push(note);
+    // localStorage.setItem('notes', JSON.stringify(notes) );
+    // init();
+    fetch(
+        "http://localhost:3000/note", {
+            body: JSON.stringify(note),
+            method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+        }
+    ).then( res => res.text()).then( resp => console.log(resp))
 }
 
 function init() {
@@ -47,14 +56,14 @@ function init() {
 
 init();
 
-// function getDataFromBackend() {
-//     fetch(
-//         "http://localhost:3000/note", {
-//             body: JSON.stringify({name: "Sam" }),
-//             method: 'POST',
-                // headers: {
-                //     'Content-Type': 'application/json'
-                // }
-//         }
-//     ).then( res => res.text()).then( resp => console.log(resp))
-// }
+function getDataFromBackend() {
+    fetch(
+        "http://localhost:3000/note", {
+            body: JSON.stringify({name: "Sam" }),
+            method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+        }
+    ).then( res => res.text()).then( resp => console.log(resp))
+}

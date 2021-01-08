@@ -34,10 +34,10 @@ function getNotes() {
 }
 
 export function saveNote(note) {
-    // let notes = getNotes();
-    // notes.push(note);
-    // localStorage.setItem('notes', JSON.stringify(notes) );
-    // init();
+    let notes = getNotes();
+    notes.push(note);
+    localStorage.setItem('notes', JSON.stringify(notes) );
+    init();
     fetch(
         "http://localhost:3000/note", {
             body: JSON.stringify(note),

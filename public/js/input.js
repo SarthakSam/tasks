@@ -241,6 +241,7 @@ reminderForm.addEventListener('submit', (event) => {
 })
 
 function isPastDate() {
+        alert("Past date is not yet made")
         // return ;
 }
 

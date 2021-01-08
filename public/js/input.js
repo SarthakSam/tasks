@@ -1,4 +1,4 @@
-import Note from '../note.js';
+import Note from './note.js';
 import {saveNote} from './index.js';
 
 const inputHeader = document.querySelector("section.container header.input-header");
@@ -108,27 +108,75 @@ function addDescription() {
 }
 
 uploadBtn.onchange = (event) => {
-        console.log("uloaded");
-        readURL(event.target)
+        if(event.target.files && event.target.files.length > 0) {
+                renderImages(event.target.files);
+        }
+        // readURL(event.target)
 }
 
-function readURL(input) {
-        if (input.files && input.files[0]) {
-                var reader = new FileReader();
-                
+async function renderImages(files) {
+        var reader = new FileReader();
+        files = Array.prototype.slice.call(files);
+        for( const file of files)
+                await renderImage(reader, file);
+}
+
+function renderImage(reader, file) {
+        let promise = new Promise( (resolve, reject) => {
                 reader.onload = function(e) {
-                        console.log(e.target.result);
+                        // console.log(e.target.result);
                         const imageContainer = document.createElement("li");
                         const image = document.createElement("img");
                         image.setAttribute('src', e.target.result);
                         image.classList.add("uploaded-image")
                         imageContainer.appendChild(image);
                         uploadedImagesList.append(imageContainer);
-                }
-                
-                reader.readAsDataURL(input.files[0]); // convert to base64 string
-        }
-}        
+                        resolve();
+                        }
+        })
+        reader.readAsDataURL(file);
+        return promise;
+}
+
+// function readURL(input) {
+//         if (input.files && input.files.length > 0) {
+//                 renderImages(images.files);
+//                 // var reader = new FileReader();
+//                 // reader.onload = function(e) {
+//                 //         // console.log(e.target.result);
+//                 //         const imageContainer = document.createElement("li");
+//                 //         const image = document.createElement("img");
+//                 //         image.setAttribute('src', e.target.result);
+//                 //         image.classList.add("uploaded-image")
+//                 //         imageContainer.appendChild(image);
+//                 //         uploadedImagesList.append(imageContainer);
+//                 // }
+//                 // const files = Array.prototype.slice.call(input.files);
+//                 // files.forEach( file => {
+//                 //         reader.readAsDataURL(file); // convert to base64 string                        
+//                 // })
+
+//                 // const formData = new FormData();                
+//                 // formData.append('images', input.files[0]);
+
+//                 // fetch(
+//                 //         "http://localhost:3000/note", {
+//                 //                 method: 'POST',
+//                 //                 body: formData,
+//                 //         }
+//                 // ).then( res => res.json()).then( resp => console.log(resp))
+
+//                 // fetch(
+//                 //         "http://localhost:3000/note", {
+//                 //         body: input.files[0],
+//                 //         method: 'POST',
+//                 //         headers: {
+//                 //                 'Content-Type': 'application/x-www-form-urlencoded',
+//                 //                 }
+//                 //         }
+//                 //         ).then( res => res.json()).then( resp => console.log(resp))
+//         }
+// }        
 
 listContainer.addEventListener("keyup", (event) => {
         if( event.target.parentElement == listContainer.lastElementChild && event.target.innerText.length == 1) {
@@ -209,11 +257,18 @@ addNotesBtn.onclick = () => {
        lisList.forEach(li => {
                list.push(li.innerText);
        })
+       const imagesList = Array.prototype.slice.call(uploadedImagesList.children);
+       let images = []
+       for(let uploadedImage of imagesList ) {
+                images.push( uploadedImage.children[0].src);
+       }
+
        const note = new Note();
        note.setVal('title', titleContainer.innerText);
        note.setVal('description', descriptionContainer.innerText); 
        note.setVal('backgroundColor',inputTab.style.backgroundColor);
        note.setVal('list', list);
+       note.setVal('images', images);
        saveNote(note);
        closeInputTab();
 }

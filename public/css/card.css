@@ -32,3 +32,20 @@
 .notes .info-card ul > li {
     padding: 5px 10px;
 }
+
+.notes .info-card ul.uploaded-images-list {
+    display: flex;
+    flex-wrap: wrap;
+    list-style: none;
+}
+
+.notes .info-card ul.uploaded-images-list li {
+    padding: 10px;
+    border: 1px solid var(--placeholder-text-color);
+    margin: 10px auto;
+}
+
+.notes .info-card ul.uploaded-images-list li img.uploaded-image {
+    width: 200px;
+    height: 150px;
+}

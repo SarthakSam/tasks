@@ -47,6 +47,19 @@ function createTaskCard( task ) {
         });
         div.appendChild(ul)
     }
+    if(task.images && task.images.length > 0) {
+        const ul = document.createElement("ul");
+        ul.classList.add("uploaded-images-list");
+        task.images.forEach( task => {
+            const li = document.createElement("li");
+            const image = document.createElement("img");
+            image.setAttribute('src', task);
+            image.classList.add("uploaded-image")
+            li.appendChild(image);
+            ul.appendChild(li);
+        });
+        div.appendChild(ul)
+    }
     div.style.backgroundColor = task.backgroundColor;
     div.classList.add("info-card");
     return div;

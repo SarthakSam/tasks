@@ -16,9 +16,12 @@ const buttonsTray = document.querySelector("section.container header.input-heade
 const addNotesBtn = document.querySelector("section.container header.input-header .input-tab .buttons-tray div > button.addNote-btn");
 const closeInputTabBtn = document.querySelector("section.container header.input-header .input-tab .buttons-tray div > button.close-input-tab");
 const colorPalette = document.querySelector("section.container header.input-header .input-tab .buttons-tray ul.buttons-list li.color-btn > ul.color-palette");
+const reminderForm = document.querySelector(" section.container header.input-header .input-tab .buttons-tray ul.buttons-list li.reminder-btn form.reminder-form");
+const reminderAndCollobarotorSection = document.querySelector(" section.container header.input-header .input-tab .reminder-collaborator-section");
+const reminderContainer = document.querySelector("section.container header.input-header .input-tab .buttons-tray ul.buttons-list li.reminder-btn div.reminder-form-container");
 
 const buttonsTrayFunctions = {
-        notify,
+        reminder,
         addUser,
         changeColor,
         addImage,
@@ -51,8 +54,16 @@ document.addEventListener('click', (event) => {
     } 
     else {
         closeInputTab();
-        //     resetInputTab();
     }
+    if(event.target == document.querySelector(" section.container header.input-header .input-tab div.reminder-collaborator-section span.reminder-info .clearReminder") ) {
+        reminderForm.elements.date.value = "";
+        reminderForm.elements.time.value = "20:00";
+        reminderForm.elements.frequency.value = "daily";
+        const reminderInfo = document.querySelector(" section.container header.input-header .input-tab div.reminder-collaborator-section span.reminder-info");
+        reminderAndCollobarotorSection.removeChild(reminderInfo);
+        // reminderInfo.style.display = "none"
+    }
+
 })
 
 function closeInputTab() {
@@ -61,6 +72,7 @@ function closeInputTab() {
         // if(inputTab)
         inputTab.style.backgroundColor = "";
         inputTab.style.display = "none";
+        reminderContainer.style.display = "none";
 }
 
 function clearDisplay() {
@@ -178,8 +190,8 @@ buttonsTray.addEventListener('click', (event) => {
         }
 })
 
-function  notify() {
-        console.log("notified");
+function  reminder() {
+        reminderContainer.style.display = "initial";
 }
 
 function  addUser() {
@@ -214,6 +226,30 @@ colorPalette.addEventListener('click', (event) => {
       inputTab.style.backgroundColor = event.target.style.backgroundColor;
 })
 
+reminderForm.addEventListener('submit', (event) => {
+        event.preventDefault();
+        let date = reminderForm.elements.date.value;
+        let time = reminderForm.elements.time.value;
+        let frequency = reminderForm.elements.frequency.value;
+        console.log(date, time, frequency);
+        if(!date || isPastDate(date))
+                return;
+        let dateSplitted = date.split("-");
+        let reminderInfoStr = dateSplitted[2] + "/" + dateSplitted[1] + "/" + dateSplitted[0];
+        createReminder(reminderInfoStr + ", " + time);
+        reminderContainer.style.display = "none";
+})
+
+function isPastDate() {
+        // return ;
+}
+
+function createReminder(reminderInfoStr) {
+       let reminderInfo = document.createElement('span');
+       reminderInfo.innerHTML = `<i class="fa fa-retweet" aria-hidden="true"></i>${reminderInfoStr}<i class = "fa fa-times clearReminder"></i>`
+       reminderInfo.classList.add('reminder-info')
+       reminderAndCollobarotorSection.prepend(reminderInfo);
+}
 addNotesBtn.onclick = () => {
        const lisList = Array.prototype.slice.call(listContainer.childNodes);
        lisList.splice(-1);

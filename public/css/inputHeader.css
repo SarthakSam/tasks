@@ -111,6 +111,58 @@ section.container header.input-header .input-tab .buttons-tray ul.buttons-list l
     display: flex;
 }
 
+section.container header.input-header .input-tab .buttons-tray ul.buttons-list li.reminder-btn div.reminder-form-container {
+    position: absolute;
+    display: none;
+    z-index: 2;
+    background: var(--background-color);
+    box-shadow: 0 1px 2px 0 rgba(0,0,0,0.6), 0 2px 6px 2px rgba(0,0,0,0.302);
+    font-size: 0.8rem;
+    border-radius: 5px;
+    width: 300px;
+}
+
+section.container header.input-header .input-tab .buttons-tray ul.buttons-list li.reminder-btn div.reminder-form-container p {
+    padding: 10px;
+    font-weight: 600;
+    color: var(--color);
+    border-bottom: 0.7px solid var(--placeholder-text-color);
+}
+
+section.container header.input-header .input-tab .buttons-tray ul.buttons-list li.reminder-btn form.reminder-form {
+    padding: 10px 15px;
+    overflow: hidden;
+}
+
+section.container header.input-header .input-tab .buttons-tray ul.buttons-list li.reminder-btn div.reminder-form-container input {
+    margin: 10px auto;
+    color: var(--color);
+    border: none;
+    border-bottom: 0.7px solid var(--placeholder-text-color);
+    width: 100%;
+    background: var(--background-color);
+    outline: none;
+}
+
+section.container header.input-header .input-tab .buttons-tray ul.buttons-list li.reminder-btn div.reminder-form-container input::-webkit-calendar-picker-indicator {
+    filter: invert(0.6);
+}
+
+section.container header.input-header .input-tab .buttons-tray ul.buttons-list li.reminder-btn div.reminder-form-container select {
+    margin: 10px auto;
+    color: var(--color);
+    border: none;
+    border-bottom: 0.7px solid var(--placeholder-text-color);
+    width: 100%;
+    background: var(--background-color);
+    outline: none;
+}
+
+section.container header.input-header .input-tab .buttons-tray ul.buttons-list li.reminder-btn div.reminder-form-container button {
+    font-size: inherit;
+    float: right;;  
+}
+
 section.container header.input-header .input-tab .buttons-tray .btn-right {
     padding: 10px 10px;
     border: none;
@@ -178,4 +230,29 @@ section.container header.input-header .input-tab  div.images-section ul.uploaded
 section.container header.input-header .input-tab  div.images-section ul.uploaded-images-list li img.uploaded-image {
     width: 300px;
     height: 200px;
+}
+
+section.container header.input-header .input-tab div.reminder-collaborator-section {
+    padding: 10px 20px;
+}
+
+section.container header.input-header .input-tab div.reminder-collaborator-section span.reminder-info {
+    border: 0.7px solid var(--placeholder-text-color);
+    padding: 4px 8px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 500;
+}
+
+section.container header.input-header .input-tab div.reminder-collaborator-section span.reminder-info i {
+    padding: 2px 6px;
+}
+
+section.container header.input-header .input-tab div.reminder-collaborator-section span.reminder-info .clearReminder {
+    padding-left: 14px;
+    opacity: 0;
+}
+
+section.container header.input-header .input-tab div.reminder-collaborator-section span.reminder-info:hover > .clearReminder {
+    opacity: 1;
 }

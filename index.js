@@ -1,48 +1,65 @@
 const express = require('express'),
       app = express(),
-      bodyParser = require('body-parser')
-      multer = require('multer'),
+      bodyParser = require('body-parser'),
+      mongoose = require('mongoose'),
       path = require('path')
       fs = require('fs');
+      Note = require("./models/Note");
+      
+mongoose.connect('mongodb://localhost/tasks', {useNewUrlParser: true, useUnifiedTopology: true});
       
 app.use(express.static('public'))
 app.use(bodyParser.json({limit: '50mb'}));
-// app.use(bodyParser.raw({limit: '50mb'}));
 app.use(bodyParser.urlencoded({limit: '50mb', extended: true}));
-// app.use(bodyParser.json());
 
-// var storage = multer.diskStorage({
-//     destination: function (req, file, cb) {
-//       cb(null, 'public/uploads')
-//     },
-//     filename: function (req, file, cb) {
-//       cb(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname))
-//     }
-//   })
-   
-//   var upload = multer({ storage: storage }).array('images', 12);
-
-app.get('/note', (req, res) => {
-    res.send("HI");
+app.get('/notes', (req, res) => {
+   Note.find({}, (err, notes) => {
+    if(err) {
+      console.log("something went wrong in /notes");
+      res.send({ status: 400, message: "Something went wrong" });
+    }
+    else {
+      res.send({
+        status: 200,
+        notes
+      })
+    }
+   });
 });
 
-app.post('/note', (req, res) => {
-   
-    if(req.body.images && req.body.images.length > 0) {
-      saveImages(req.body.images);
-    }
-    return res.send( {message: "success"});
+app.post('/notes', (req, res) => {
+  let uploadedImages;
+  if(req.body.images && req.body.images.length > 0) {
+    uploadedImages = saveImages(req.body.images);
+  }
 
-    // upload(req, res, (err) => {
-    //     if(err) {
-    //        return res.send( {error: "Something went wrong"});
-    //     }
-    //     return res.send( {message: "success"});
-    // })
+  const newNote = new Note( {
+    title: req.body.title,
+    description: req.body.description,
+    list: req.body.list,
+    backgroundColor: req.body.backgroundColor,
+    images: uploadedImages
+  } );
+ 
+  newNote.save().then( note => {
+    console.log(note + "saved");
+    res.send( {
+      status: 200,
+      message: "note saved successfully"
+    })
+  }).catch(err => {
+      console.log(err)
+      res.send( {
+        status: 400,
+        message: "Unable to save message"
+      })
+  });
 })
 
 function saveImages(images) {
-  const path = './public/uploads/';
+  const pathToPublicDir = './public';
+  const pathToUploadDir = "/uploads/";
+  const path = pathToPublicDir + pathToUploadDir;
   let uploadedImages = images.map( image => {
     const ext = image.substring(image.indexOf("/")+1, image.indexOf(";base64"));
     const fileType = image.substring("data:".length,image.indexOf("/"));
@@ -58,13 +75,11 @@ function saveImages(images) {
     if(!fs.existsSync(path)) {
         fs.mkdirSync(path);
     }
-    // if (!fs.existsSync(localPath)) {
-    //     fs.mkdirSync(localPath);
-    // }
+  
     fs.writeFileSync(path+filename, base64Data, 'base64');
-    return {filename, path};
+    return pathToUploadDir + filename;
   });
-  console.log(uploadedImages);
+  return uploadedImages;
 }
 
 app.listen(3000, () => {

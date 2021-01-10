@@ -254,10 +254,10 @@ function createReminder(reminderInfoStr) {
 addNotesBtn.onclick = () => {
        const lisList = Array.prototype.slice.call(listContainer.childNodes);
        lisList.splice(-1);
-       let list = [];
-       lisList.forEach(li => {
-               list.push(li.innerText);
-       })
+       let list = lisList.filter( li => li.innerText).map(li => li.innerText);
+//        lisList.forEach(li => {
+//                list.push(li.innerText);
+//        })
        const imagesList = Array.prototype.slice.call(uploadedImagesList.children);
        let images = []
        for(let uploadedImage of imagesList ) {

@@ -26,6 +26,10 @@ section.container header.input-header .list-icon-right {
     /* font-size: 2rem; */
 }
 
+.active {
+    color: white !important;
+}
+
 section.container header.input-header .input-tab {
     display: none;
     overflow: auto;

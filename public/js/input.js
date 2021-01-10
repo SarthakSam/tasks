@@ -51,28 +51,48 @@ document.addEventListener('click', (event) => {
                 }
             }
 
+            if(event.target == document.querySelector(" section.container header.input-header .input-tab div.reminder-collaborator-section span.reminder-info .clearReminder") ) {
+                resetReminder();
+            }
+            if(event.target == document.querySelector("section.container header.input-header .input-tab i.fas.fa-thumbtack") ) {
+                    let val = event.target.getAttribute("data-value");
+                    event.target.setAttribute("data-value", val == "pin"? "unpin" : "pin");
+                    if(val == "pin")
+                        event.target.classList.add("active");
+                    else
+                        event.target.classList.remove("active");
+            }
+        
+        
+
     } 
     else {
         closeInputTab();
     }
-    if(event.target == document.querySelector(" section.container header.input-header .input-tab div.reminder-collaborator-section span.reminder-info .clearReminder") ) {
+})
+
+function resetReminder() {
         reminderForm.elements.date.value = "";
         reminderForm.elements.time.value = "20:00";
         reminderForm.elements.frequency.value = "daily";
         const reminderInfo = document.querySelector(" section.container header.input-header .input-tab div.reminder-collaborator-section span.reminder-info");
-        reminderAndCollobarotorSection.removeChild(reminderInfo);
+        if(reminderInfo)
+                reminderAndCollobarotorSection.removeChild(reminderInfo);
         // reminderInfo.style.display = "none"
-    }
+}
 
-})
+function resetPin() {
+        document.querySelector("section.container header.input-header .input-tab i.fas.fa-thumbtack").classList.remove("active");
+}
 
 function closeInputTab() {
         clearDisplay();
         inputBtn.style.display = "inherit";
-        // if(inputTab)
         inputTab.style.backgroundColor = "";
         inputTab.style.display = "none";
         reminderContainer.style.display = "none";
+        resetPin();
+        resetReminder();
 }
 
 function clearDisplay() {
@@ -251,6 +271,7 @@ function createReminder(reminderInfoStr) {
        reminderInfo.classList.add('reminder-info')
        reminderAndCollobarotorSection.prepend(reminderInfo);
 }
+
 addNotesBtn.onclick = () => {
        const lisList = Array.prototype.slice.call(listContainer.childNodes);
        lisList.splice(-1);

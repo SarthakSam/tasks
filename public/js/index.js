@@ -1,3 +1,5 @@
+import {successMessage, errorMessage, warningMessage} from './message.js';
+
 async function getNotes() {
     fetch("http://localhost:3000/notes")
     .then( res => res.json())
@@ -5,12 +7,12 @@ async function getNotes() {
         if(res.status == 200) 
             renderData( res.notes );
         else {
-            alert("something went wrong");
+            errorMessage("something went wrong")
             renderData( [] );   
         }
     })
     .catch(err => {
-        alert("something went wrong", err);
+        errorMessage("something went wrong" + err)
         renderData([]);
     });  
     // return localStorage.getItem('notes')? JSON.parse(localStorage.getItem('notes')): [];    
@@ -31,14 +33,16 @@ export function saveNote(note) {
         }
     ).then( res => res.json())
     .then( res => {
-        if(res.status == 200) 
+        if(res.status == 200) {
             getNotes();
+            successMessage("Note saved successfully");
+        }
         else {
-            alert("Unable to save post");
+            errorMessage("Unable to save post")
         }    
     })
     .catch(err => {
-        alert("Something went wrong");
+        errorMessage("Something went wrong")
     })
 }
 

@@ -1,5 +1,6 @@
 import Note from './note.js';
 import {saveNote} from './index.js';
+import {successMessage, errorMessage, warningMessage} from './message.js';
 
 const inputHeader = document.querySelector("section.container header.input-header");
 const inputBtn = document.querySelector("section.container header.input-header .input-tab-btn");
@@ -263,7 +264,7 @@ reminderForm.addEventListener('submit', (event) => {
 })
 
 function isPastDate() {
-        alert("Past date is not yet made")
+        warningMessage("Past date is not yet made");
         // return ;
 }
 
@@ -277,7 +278,7 @@ function createReminder(reminderInfoStr) {
 addNotesBtn.onclick = () => {
        const lisList = Array.prototype.slice.call(listContainer.childNodes);
        lisList.splice(-1);
-       let list = lisList.filter( li => li.innerText).map(li => li.innerText);
+       let list = lisList.filter( li => li.innerText && li.innerText.trim()).map(li => li.innerText);
 //        lisList.forEach(li => {
 //                list.push(li.innerText);
 //        })
@@ -290,14 +291,17 @@ addNotesBtn.onclick = () => {
        let isPinned = document.querySelector("section.container header.input-header .input-tab i.fas.fa-thumbtack").getAttribute("data-value") == 'unpin'
 
        const note = new Note();
-       note.setVal('title', titleContainer.innerText);
-       note.setVal('description', descriptionContainer.innerText); 
+       note.setVal('title', titleContainer.innerText.trim());
+       note.setVal('description', descriptionContainer.innerText.trim()); 
        note.setVal('backgroundColor',inputTab.style.backgroundColor);
        note.setVal('list', list);
        note.setVal('images', images);
        note.setVal('isPinned', isPinned);
        
-       saveNote(note);
+        if( note.title || note.description || note.list && note.list.length > 0 || note.images && note.images.length > 0 )
+               saveNote(note);
+        else
+               errorMessage("Cannot save empty note");
        closeInputTab();
 }
 

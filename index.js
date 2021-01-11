@@ -38,7 +38,8 @@ app.post('/notes', (req, res) => {
     description: req.body.description,
     list: req.body.list,
     backgroundColor: req.body.backgroundColor,
-    images: uploadedImages
+    images: uploadedImages,
+    isPinned: req.body.isPinned
   } );
  
   newNote.save().then( note => {

@@ -17,7 +17,7 @@ const addNotesBtn = document.querySelector("section.container header.input-heade
 const closeInputTabBtn = document.querySelector("section.container header.input-header .input-tab .buttons-tray div > button.close-input-tab");
 const colorPalette = document.querySelector("section.container header.input-header .input-tab .buttons-tray ul.buttons-list li.color-btn > ul.color-palette");
 const reminderForm = document.querySelector(" section.container header.input-header .input-tab .buttons-tray ul.buttons-list li.reminder-btn form.reminder-form");
-const reminderAndCollobarotorSection = document.querySelector(" section.container header.input-header .input-tab .reminder-collaborator-section");
+const reminderAndColloboratorSection = document.querySelector(" section.container header.input-header .input-tab .reminder-collaborator-section");
 const reminderContainer = document.querySelector("section.container header.input-header .input-tab .buttons-tray ul.buttons-list li.reminder-btn div.reminder-form-container");
 
 const buttonsTrayFunctions = {
@@ -77,12 +77,14 @@ function resetReminder() {
         reminderForm.elements.frequency.value = "daily";
         const reminderInfo = document.querySelector(" section.container header.input-header .input-tab div.reminder-collaborator-section span.reminder-info");
         if(reminderInfo)
-                reminderAndCollobarotorSection.removeChild(reminderInfo);
+        reminderAndColloboratorSection.removeChild(reminderInfo);
         // reminderInfo.style.display = "none"
 }
 
 function resetPin() {
-        document.querySelector("section.container header.input-header .input-tab i.fas.fa-thumbtack").classList.remove("active");
+        let icon = document.querySelector("section.container header.input-header .input-tab i.fas.fa-thumbtack");
+        icon.classList.remove("active");
+        icon.setAttribute("data-value", "pin");
 }
 
 function closeInputTab() {
@@ -269,7 +271,7 @@ function createReminder(reminderInfoStr) {
        let reminderInfo = document.createElement('span');
        reminderInfo.innerHTML = `<i class="fa fa-retweet" aria-hidden="true"></i>${reminderInfoStr}<i class = "fa fa-times clearReminder"></i>`
        reminderInfo.classList.add('reminder-info')
-       reminderAndCollobarotorSection.prepend(reminderInfo);
+       reminderAndColloboratorSection.prepend(reminderInfo);
 }
 
 addNotesBtn.onclick = () => {
@@ -285,12 +287,16 @@ addNotesBtn.onclick = () => {
                 images.push( uploadedImage.children[0].src);
        }
 
+       let isPinned = document.querySelector("section.container header.input-header .input-tab i.fas.fa-thumbtack").getAttribute("data-value") == 'unpin'
+
        const note = new Note();
        note.setVal('title', titleContainer.innerText);
        note.setVal('description', descriptionContainer.innerText); 
        note.setVal('backgroundColor',inputTab.style.backgroundColor);
        note.setVal('list', list);
        note.setVal('images', images);
+       note.setVal('isPinned', isPinned);
+       
        saveNote(note);
        closeInputTab();
 }

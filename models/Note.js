@@ -6,7 +6,8 @@ const noteSchema = new mongoose.Schema({
     list: [String],
     date: { type: Date, default: Date.now },
     images: [String],
-    backgroundColor: { type: String, default: Date.now }
+    backgroundColor: { type: String, default: Date.now },
+    isPinned: Boolean
   })
   
 const Note = mongoose.model("Note", noteSchema);

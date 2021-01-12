@@ -4,6 +4,7 @@ const express = require('express'),
       mongoose = require('mongoose'),
       path = require('path')
       fs = require('fs');
+      Reminder = require('./models/Reminder');
       Note = require("./models/Note");
       
 mongoose.connect('mongodb://localhost/tasks', {useNewUrlParser: true, useUnifiedTopology: true});
@@ -33,28 +34,42 @@ app.post('/notes', (req, res) => {
     uploadedImages = saveImages(req.body.images);
   }
 
-  const newNote = new Note( {
-    title: req.body.title,
-    description: req.body.description,
-    list: req.body.list,
-    backgroundColor: req.body.backgroundColor,
-    images: uploadedImages,
-    isPinned: req.body.isPinned
-  } );
- 
-  newNote.save().then( note => {
-    console.log(note + "saved");
-    res.send( {
-      status: 200,
-      message: "note saved successfully"
-    })
-  }).catch(err => {
-      console.log(err)
-      res.send( {
+  Reminder.create(req.body.reminder, (err, reminder) => {
+    if(err) {
+      console.log("unable to create reminder");
+      res.send({
         status: 400,
-        message: "Unable to save message"
+        message: "Unable to create note because reminder was not created"
       })
+    }
+    else {
+
+      const newNote = new Note( {
+        title: req.body.title,
+        description: req.body.description,
+        list: req.body.list,
+        backgroundColor: req.body.backgroundColor,
+        images: uploadedImages,
+        isPinned: req.body.isPinned,
+        reminder: reminder
+      } );
+      
+      newNote.save().then( note => {
+        console.log(note + "saved");
+        res.send( {
+          status: 200,
+          message: "note saved successfully"
+        })
+      }).catch(err => {
+          console.log(err)
+          res.send( {
+            status: 400,
+            message: "Unable to create note"
+          })
+      });
+    }
   });
+
 })
 
 function saveImages(images) {

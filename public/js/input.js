@@ -269,9 +269,12 @@ function isPastDate() {
 }
 
 function createReminder(reminderInfoStr) {
-       let reminderInfo = document.createElement('span');
+       let reminderInfo = document.querySelector("section.container header.input-header .input-tab div.reminder-collaborator-section span.reminder-info"); 
+       if(reminderInfo == null) {
+            reminderInfo = document.createElement('span');
+            reminderInfo.classList.add('reminder-info')
+       }
        reminderInfo.innerHTML = `<i class="fa fa-retweet" aria-hidden="true"></i>${reminderInfoStr}<i class = "fa fa-times clearReminder"></i>`
-       reminderInfo.classList.add('reminder-info')
        reminderAndColloboratorSection.prepend(reminderInfo);
 }
 
@@ -290,6 +293,16 @@ addNotesBtn.onclick = () => {
 
        let isPinned = document.querySelector("section.container header.input-header .input-tab i.fas.fa-thumbtack").getAttribute("data-value") == 'unpin'
 
+       let reminderInfoElem = document.querySelector("section.container header.input-header .input-tab div.reminder-collaborator-section span.reminder-info");
+       let reminderInfo = null;
+       if(reminderInfoElem != null) {
+               reminderInfo = {
+                       date: reminderForm.elements.date.value,
+                       time: reminderForm.elements.time.value,
+                       frequency: reminderForm.elements.frequency.value
+               }
+       }
+
        const note = new Note();
        note.setVal('title', titleContainer.innerText.trim());
        note.setVal('description', descriptionContainer.innerText.trim()); 
@@ -297,8 +310,10 @@ addNotesBtn.onclick = () => {
        note.setVal('list', list);
        note.setVal('images', images);
        note.setVal('isPinned', isPinned);
+       if(reminderInfoElem)
+                note.setVal('reminder', reminderInfo); 
        
-        if( note.title || note.description || note.list && note.list.length > 0 || note.images && note.images.length > 0 )
+        if( note.title || note.description || note.list && note.list.length > 0 || note.images && note.images.length > 0 || note.reminder)
                saveNote(note);
         else
                errorMessage("Cannot save empty note");

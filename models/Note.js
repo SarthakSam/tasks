@@ -7,7 +7,11 @@ const noteSchema = new mongoose.Schema({
     date: { type: Date, default: Date.now },
     images: [String],
     backgroundColor: { type: String, default: Date.now },
-    isPinned: Boolean
+    isPinned: Boolean,
+    reminder: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Reminder'
+    }
   })
   
 const Note = mongoose.model("Note", noteSchema);

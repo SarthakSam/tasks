@@ -6,6 +6,7 @@ export default class Note {
         this.images = [];
         this.backgroundColor = "";
         this.isPinned = false;
+        this.reminder = null;
     }   
 
     setVal(key, value) {

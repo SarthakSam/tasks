@@ -49,3 +49,13 @@
     width: 200px;
     height: 150px;
 }
+
+.notes .info-card ul.card-buttons {
+    display: flex;
+    justify-content: space-between;
+    opacity: 0;
+}
+
+.notes .info-card:hover > ul.card-buttons {
+    opacity: 1;
+}

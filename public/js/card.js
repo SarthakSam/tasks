@@ -6,6 +6,9 @@ let totalCardsCurrentlyInArow = 4;
 const verticalMarginBetCards = 10;
 
 function renderCards(cards) {
+    let pinnedTask = cards.filter( card => card.isPinned);
+    let unpinnedTask = cards.filter( card => !card.isPinned);
+    cards = [...pinnedTask, ...unpinnedTask];
     const cardsContainer = document.querySelector('.container main')
     cardsContainer.innerHTML = ""; 
     const fragment = document.createDocumentFragment();
@@ -62,7 +65,23 @@ function createTaskCard( task ) {
     }
     div.style.backgroundColor = task.backgroundColor;
     div.classList.add("info-card");
+    div.appendChild( getCardButtons() );
     return div;
+}
+
+function getCardButtons() {
+    const ul = document.createElement("ul");
+    const icons = [["far", "fa-bell"], ["fas", "fa-user-plus"], ["fas", "fa-palette"], ["far", "fa-image"], ["fa", "fa-check-square"], ["fas", "fa-ellipsis-v"]];
+    icons.forEach(iconArr => {
+        const li = document.createElement("li");
+        const i = document.createElement("i");
+        i.classList.add(iconArr[0]);
+        i.classList.add(iconArr[1]);
+        li.appendChild(i);
+        ul.appendChild(li);
+    });
+    ul.classList.add("card-buttons");
+    return ul;
 }
 
 function adjustCardsToScreenSize(cardsList) {

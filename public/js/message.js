@@ -8,10 +8,10 @@ function render(message, color) {
     document.body.appendChild(div);
     setTimeout( () => {
         div.style.opacity = 0;
-    } ,2000);
+    } ,3000);
     setTimeout( () => {
         document.body.removeChild(div);        
-    }, 3000);
+    }, 4000);
 }
 
 export function successMessage( message ) {

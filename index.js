@@ -14,18 +14,18 @@ app.use(bodyParser.json({limit: '50mb'}));
 app.use(bodyParser.urlencoded({limit: '50mb', extended: true}));
 
 app.get('/notes', (req, res) => {
-   Note.find({}, (err, notes) => {
-    if(err) {
-      console.log("something went wrong in /notes");
-      res.send({ status: 400, message: "Something went wrong" });
-    }
-    else {
-      res.send({
-        status: 200,
-        notes
-      })
-    }
-   });
+  Note.find({}).populate("reminder").exec( (err, notes) => {
+      if(err) {
+        console.log("something went wrong in /notes");
+        res.send({ status: 400, message: "Something went wrong" });
+      }
+      else {
+        res.send({
+          status: 200,
+          notes
+        })
+      }
+     } )
 });
 
 app.post('/notes', (req, res) => {

@@ -65,8 +65,18 @@ function createTaskCard( task ) {
     }
     div.style.backgroundColor = task.backgroundColor;
     div.classList.add("info-card");
+    if(task.reminder)
+        div.append( getReminderElement( task.reminder ) );
     div.appendChild( getCardButtons() );
     return div;
+}
+
+function getReminderElement(reminderInfo) {
+    let reminderInfoElem = document.createElement('span');
+    reminderInfoElem.classList.add('reminder-info')
+    reminderInfoElem.innerHTML = `<i class="fa fa-retweet" aria-hidden="true"></i>${reminderInfo.date + ", " + reminderInfo.time + ", " + capitalize(reminderInfo.frequency) }<i class = "fa fa-times clearReminder"></i>`
+    return reminderInfoElem;
+ 
 }
 
 function getCardButtons() {
@@ -124,4 +134,8 @@ function renderData(data) {
         adjustCardsToScreenSize(cardsList)
     })
     
+}
+
+function capitalize(string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
 }

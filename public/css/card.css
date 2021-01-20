@@ -59,3 +59,24 @@
 .notes .info-card:hover > ul.card-buttons {
     opacity: 1;
 }
+
+.notes .info-card span.reminder-info {
+    border: 0.7px solid var(--placeholder-text-color);
+    padding: 4px 8px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 500;
+}
+
+.notes .info-card span.reminder-info i {
+    padding: 2px 6px;
+}
+
+.notes .info-card span.reminder-info .clearReminder {
+    padding-left: 14px;
+    opacity: 0;
+}
+
+.notes .info-card span.reminder-info:hover > .clearReminder {
+    opacity: 1;
+}

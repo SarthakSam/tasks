@@ -259,9 +259,13 @@ reminderForm.addEventListener('submit', (event) => {
                 return;
         let dateSplitted = date.split("-");
         let reminderInfoStr = dateSplitted[2] + "/" + dateSplitted[1] + "/" + dateSplitted[0];
-        createReminder(reminderInfoStr + ", " + time);
+        createReminder(reminderInfoStr + ", " + time + ", " + capitalize(frequency) );
         reminderContainer.style.display = "none";
 })
+
+function capitalize(string) {
+        return string.charAt(0).toUpperCase() + string.slice(1);
+}
 
 function isPastDate() {
         warningMessage("Past date is not yet made");

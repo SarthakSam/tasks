@@ -72,6 +72,25 @@ app.post('/notes', (req, res) => {
 
 })
 
+app.patch('/notes', (req, res) => {
+  Note.findByIdAndUpdate(req.body.id, { $set: req.body }, (err, updatedNote) => {
+    if(err) {
+      console.log("unable to edit note");
+      res.send({
+        status: 400,
+        message: "Unable to edit note"
+      })
+    }
+    else {
+      console.log("editedNote" + updatedNote);
+      res.send( {
+        status: 200,
+        message: "note edited successfully"
+      })
+    }
+  });
+})
+
 function saveImages(images) {
   const pathToPublicDir = './public';
   const pathToUploadDir = "/uploads/";

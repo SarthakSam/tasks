@@ -1,11 +1,14 @@
+import {patchNote} from './index.js';
 
 const infoCardWidth = 300;
 const totalCardsInRow = 4;
-// const container = document.querySelector(".container");
 let totalCardsCurrentlyInArow = 4;
 const verticalMarginBetCards = 10;
+const container = document.querySelector("main.notes");
+let cards = [];
 
-function renderCards(cards) {
+function renderCards() {
+    cards = localStorage.getItem('notes')? JSON.parse(localStorage.getItem('notes')): [];
     let pinnedTask = cards.filter( card => card.isPinned);
     let unpinnedTask = cards.filter( card => !card.isPinned);
     cards = [...pinnedTask, ...unpinnedTask];
@@ -13,8 +16,9 @@ function renderCards(cards) {
     cardsContainer.innerHTML = ""; 
     const fragment = document.createDocumentFragment();
     const cardsList = [];
-    cards.forEach( task => {
+    cards.forEach( (task, index) => {
         const taskDiv = createTaskCard( task );
+        taskDiv.setAttribute("data-index", index);
         // const div = document.createElement('div');
         // div.innerHTML = task;
         // div.classList.add("info-card");
@@ -29,6 +33,13 @@ function renderCards(cards) {
 
 function createTaskCard( task ) {
     const div = document.createElement('div');
+    const pinIcon = document.createElement("i");
+    pinIcon.classList.add("fas")
+    pinIcon.classList.add("fa-thumbtack")
+    pinIcon.classList.add("list-icon-right")
+    switchisPinned(pinIcon, task.isPinned);
+    div.appendChild(pinIcon);
+        
     if(task.title) {
         const title = document.createElement('p');
         title.innerText = task.title
@@ -65,7 +76,7 @@ function createTaskCard( task ) {
     }
     div.style.backgroundColor = task.backgroundColor;
     div.classList.add("info-card");
-    if(task.reminder)
+    if(task.reminder && task.reminder.date)
         div.append( getReminderElement( task.reminder ) );
     div.appendChild( getCardButtons() );
     return div;
@@ -124,7 +135,7 @@ function adjustCardsToScreenSize(cardsList) {
     });
 }
 
-function renderData(data) {
+export function renderData(data) {
     let cardsList = renderCards(data);
     window.addEventListener('resize', () => {
         adjustCardsToScreenSize(cardsList)
@@ -138,4 +149,25 @@ function renderData(data) {
 
 function capitalize(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
+}
+
+document.addEventListener('click', (event) => {
+    if( container.contains( event.target ) && event.target !== container) {
+       if( event.target.classList.contains("fa-thumbtack") ) {
+            let val = event.target.getAttribute("data-value");
+            let index = +event.target.parentNode.getAttribute("data-index");
+            switchisPinned(event.target, val == "pin");
+            patchNote(cards[index]._id, 'isPinned', val == "pin" );
+       }
+    }
+} )
+
+function switchisPinned(elem, val) {
+    if(val) {
+        elem.classList.add("active");
+        elem.setAttribute("data-value", "unpin");
+    } else {
+        elem.classList.remove("active",);
+        elem.setAttribute("data-value", "pin");
+    }
 }

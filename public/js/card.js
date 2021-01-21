@@ -54,6 +54,7 @@ function createTaskCard( task ) {
     }
     if(task.list && task.list.length > 0) {
         const ul = document.createElement("ul");
+        ul.classList.add("info-list");
         task.list.forEach( task => {
             const li = document.createElement("li");
             li.innerText = task;
@@ -152,6 +153,7 @@ function capitalize(string) {
 }
 
 document.addEventListener('click', (event) => {
+    removeMenuAndListOpacity();
     if( container.contains( event.target ) && event.target !== container) {
        if( event.target.classList.contains("fa-thumbtack") ) {
             let val = event.target.getAttribute("data-value");
@@ -159,8 +161,43 @@ document.addEventListener('click', (event) => {
             switchisPinned(event.target, val == "pin");
             patchNote(cards[index]._id, 'isPinned', val == "pin" );
        }
+       else if( event.target.classList.contains("fa-ellipsis-v") ) {
+            console.log("open menu");
+            let iconsList = event.target.parentNode.parentNode;
+            iconsList.classList.add("focus");
+            event.target.parentNode.appendChild(createMenu())
+       }
+       else if( event.target.classList.contains("fa-bell") ) {
+
+       }
+       else if( event.target.classList.contains("fa-user-plus") ) {
+
+        }
+        else if( event.target.classList.contains("fa-palette") ) {
+
+        }
+        else if( event.target.classList.contains("fa-image") ) {
+
+        }
+        else if( event.target.classList.contains("fa-check-square") ) {
+
+        }
+       else {
+
+       }
+    }
+    else {
     }
 } )
+
+function removeMenuAndListOpacity() {
+    let buttonsMenu = document.querySelector(".info-card .buttons-menu");
+    if( !buttonsMenu )
+        return;
+    let iconsList = buttonsMenu.parentNode.parentNode;
+    buttonsMenu.parentNode.removeChild(buttonsMenu);
+    iconsList.classList.remove("focus");
+}
 
 function switchisPinned(elem, val) {
     if(val) {
@@ -170,4 +207,41 @@ function switchisPinned(elem, val) {
         elem.classList.remove("active",);
         elem.setAttribute("data-value", "pin");
     }
+}
+
+function createMenu() {
+    const div = document.createElement('div');
+    div.classList.add("buttons-menu");
+    const ul = document.createElement('ul');
+    div.appendChild(ul);
+    const menuItems = [
+        { 
+            label: "Add Label", action: addLabel
+        },
+        { 
+            label: "Delete Note", action: deleteNote
+        },
+        { 
+            label: "Archive", action: archive
+        }
+    ]        
+    menuItems.forEach(menuItem => {
+        const li = document.createElement("li");
+        li.innerText = menuItem.label;
+        li.onclick = menuItem.action;
+        ul.appendChild(li);
+    })
+    return div;
+}
+
+function addLabel() {
+    console.log("label addded");
+}
+
+function deleteNote() {
+    console.log("deleteNote");
+}
+
+function archive() {
+    console.log("archive");
 }

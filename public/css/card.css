@@ -43,7 +43,7 @@
     list-style: none;
 }
 
-.notes .info-card ul > li {
+.notes .info-card ul.info-list > li {
     padding: 5px 0;
 }
 
@@ -68,7 +68,15 @@
     display: flex;
     justify-content: space-between;
     opacity: 0;
+    cursor: pointer;
 }
+
+.notes .info-card ul.card-buttons > li > i {
+    /* padding: 5px; */
+    text-align: center;
+    width: 15px;
+}
+
 
 .notes .info-card:hover > ul.card-buttons {
     opacity: 1;
@@ -94,3 +102,33 @@
 .notes .info-card span.reminder-info:hover > .clearReminder {
     opacity: 1;
 }
+
+.buttons-menu {
+    position: absolute;
+    z-index: 2;
+    box-shadow: 0 1px 2px 0 rgb(0 0 0 / 60%), 0 2px 6px 2px rgb(0 0 0 / 30%);
+    background: var(--background-color);
+    color: white;
+    font-weight: 500;
+    border-radius: 5px;
+}
+
+.info-card .buttons-menu > ul {
+    list-style: none;
+    width: max-content;
+}
+
+.info-card  .buttons-menu > ul > li {
+    padding: 8px 10px;
+    cursor: pointer;
+}
+
+.info-card .buttons-menu > ul > li:hover {
+    background:#41331c;
+}
+
+.notes .info-card ul.card-buttons.focus {
+    opacity: 1;
+}
+
+

@@ -1,8 +1,8 @@
 import {successMessage, errorMessage, warningMessage} from './message.js';
 import { renderData } from './card.js'
 
-async function getNotes() {
-    fetch("http://localhost:3000/notes")
+export function getNotes(urlEnd) {
+    fetch("http://localhost:3000/" + urlEnd)
     .then( res => res.json())
     .then( res => {
         if(res.status == 200) {
@@ -51,12 +51,10 @@ export function saveNote(note) {
 }
 
 export function patchNote(id, property, value) {
-    let reqBody = {
-        id,
-    }
+    let reqBody = {};
     reqBody[property] = value;
     fetch(
-        "http://localhost:3000/notes", {
+        "http://localhost:3000/notes/" + id, {
             body: JSON.stringify(reqBody),
             method: 'PATCH',
                 headers: {
@@ -78,8 +76,31 @@ export function patchNote(id, property, value) {
     })
 }
 
+export function _deleteNote(id) {
+    fetch(
+        "http://localhost:3000/notes/" + id, {
+            method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+        }
+    ).then( res => res.json())
+    .then( res => {
+        if(res.status == 200) {
+            init();
+            successMessage("Note deleted successfully");
+        }
+        else {
+            errorMessage("Unable to delete post")
+        }    
+    })
+    .catch(err => {
+        errorMessage("Something went wrong")
+    })
+}
+
 function init() {
-    getNotes();
+    getNotes("notes");
 }
 
 init();

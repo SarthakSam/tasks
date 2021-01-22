@@ -13,8 +13,15 @@ app.use(express.static('public'))
 app.use(bodyParser.json({limit: '50mb'}));
 app.use(bodyParser.urlencoded({limit: '50mb', extended: true}));
 
+// (async function() {
+//   await Note.deleteMany({ });
+//   await Reminder.deleteMany({ });
+//   console.log("deleted Data");
+
+// })();
+
 app.get('/notes', (req, res) => {
-  Note.find({}).populate("reminder").exec( (err, notes) => {
+  Note.find({  status: 0}).populate("reminder").exec( (err, notes) => {
       if(err) {
         console.log("something went wrong in /notes");
         res.send({ status: 400, message: "Something went wrong" });
@@ -28,52 +35,52 @@ app.get('/notes', (req, res) => {
      } )
 });
 
-app.post('/notes', (req, res) => {
+app.post('/notes', async (req, res) => {
   let uploadedImages;
   if(req.body.images && req.body.images.length > 0) {
     uploadedImages = saveImages(req.body.images);
   }
+  let reminder;
+  if(req.body.reminder) {
+      reminder = await Reminder.create(req.body.reminder);
+  }
+    // Reminder.create(req.body.reminder, (err, reminder) => {
+    //   if(err) {
+    //     console.log("unable to create reminder");
+    //     res.send({
+    //       status: 400,
+    //       message: "Unable to create note because reminder was not created"
+    //     })
+    //   }
+    //   else {
+    const newNote = new Note( {
+      title: req.body.title,
+      description: req.body.description,
+      list: req.body.list,
+      backgroundColor: req.body.backgroundColor,
+      images: uploadedImages,
+      isPinned: req.body.isPinned,
+      reminder: reminder
+    } );
 
-  Reminder.create(req.body.reminder, (err, reminder) => {
-    if(err) {
-      console.log("unable to create reminder");
-      res.send({
-        status: 400,
-        message: "Unable to create note because reminder was not created"
-      })
-    }
-    else {
-
-      const newNote = new Note( {
-        title: req.body.title,
-        description: req.body.description,
-        list: req.body.list,
-        backgroundColor: req.body.backgroundColor,
-        images: uploadedImages,
-        isPinned: req.body.isPinned,
-        reminder: reminder
-      } );
-      
-      newNote.save().then( note => {
+    newNote.save().then( note => {
         console.log(note + "saved");
         res.send( {
           status: 200,
           message: "note saved successfully"
         })
-      }).catch(err => {
+        }).catch(err => {
           console.log(err)
           res.send( {
             status: 400,
             message: "Unable to create note"
           })
       });
-    }
-  });
 
 })
 
-app.patch('/notes', (req, res) => {
-  Note.findByIdAndUpdate(req.body.id, { $set: req.body }, (err, updatedNote) => {
+app.patch('/notes/:id', (req, res) => {
+  Note.findByIdAndUpdate(req.params.id, { $set: req.body }, (err, updatedNote) => {
     if(err) {
       console.log("unable to edit note");
       res.send({
@@ -89,6 +96,78 @@ app.patch('/notes', (req, res) => {
       })
     }
   });
+})
+
+app.delete('/notes/:id', (req, res) => {
+  let obj = {
+    status: 2
+  }
+  Note.findByIdAndUpdate(req.params.id, { $set: obj }, (err, updatedNote) => {
+    if(err) {
+      console.log("unable to edit note");
+      res.send({
+        status: 400,
+        message: "Unable to delete note"
+      })
+    }
+    else {
+      console.log("editedNote" + updatedNote);
+      res.send( {
+        status: 200,
+        message: "note deleted successfully"
+      })
+    }
+  });
+})
+
+app.get('/reminders', (req, res) => {
+  Note.find({reminder: { $ne: null } }).populate("reminder").exec( (err, notes) => {
+    if(err) {
+      console.log("something went wrong in /notes");
+      res.send({ status: 400, message: "Something went wrong" });
+    }
+    else {
+      res.send({
+        status: 200,
+        notes
+      })
+    }
+   } )
+})
+
+
+app.get('/archive', (req, res) => {
+  Note.find({  status: 1}).populate("reminder").exec( (err, notes) => {
+    if(err) {
+      console.log("something went wrong in /notes");
+      res.send({ status: 400, message: "Something went wrong" });
+    }
+    else {
+      res.send({
+        status: 200,
+        notes
+      })
+    }
+   } )
+})
+
+app.get('/bin', (req, res) => {
+  Note.find({  status: 2}).populate("reminder").exec( (err, notes) => {
+    if(err) {
+      console.log("something went wrong in /notes");
+      res.send({ status: 400, message: "Something went wrong" });
+    }
+    else {
+      res.send({
+        status: 200,
+        notes
+      })
+    }
+   } )
+})
+
+app.get("*", (req, res) => {
+  res.send({ status: 404, message: "not found" })
 })
 
 function saveImages(images) {

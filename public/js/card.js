@@ -1,4 +1,4 @@
-import {patchNote} from './index.js';
+import {patchNote, _deleteNote} from './index.js';
 
 const infoCardWidth = 300;
 const totalCardsInRow = 4;
@@ -165,7 +165,7 @@ document.addEventListener('click', (event) => {
             console.log("open menu");
             let iconsList = event.target.parentNode.parentNode;
             iconsList.classList.add("focus");
-            event.target.parentNode.appendChild(createMenu())
+            event.target.parentNode.appendChild(createMenu(iconsList.parentNode))
        }
        else if( event.target.classList.contains("fa-bell") ) {
 
@@ -209,7 +209,7 @@ function switchisPinned(elem, val) {
     }
 }
 
-function createMenu() {
+function createMenu(card) {
     const div = document.createElement('div');
     div.classList.add("buttons-menu");
     const ul = document.createElement('ul');
@@ -228,20 +228,21 @@ function createMenu() {
     menuItems.forEach(menuItem => {
         const li = document.createElement("li");
         li.innerText = menuItem.label;
-        li.onclick = menuItem.action;
+        li.onclick = () => { menuItem.action(card) };
         ul.appendChild(li);
     })
     return div;
 }
 
-function addLabel() {
+function addLabel(card) {
     console.log("label addded");
 }
 
-function deleteNote() {
-    console.log("deleteNote");
+function deleteNote(card) {
+    let index = +card.getAttribute('data-index');
+    _deleteNote(cards[index]._id);
 }
 
-function archive() {
+function archive(card) {
     console.log("archive");
 }

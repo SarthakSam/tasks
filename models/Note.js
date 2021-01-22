@@ -8,9 +8,11 @@ const noteSchema = new mongoose.Schema({
     images: [String],
     backgroundColor: { type: String, default: Date.now },
     isPinned: Boolean,
+    status: { type: Number, default: 0 },
     reminder: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: 'Reminder'
+      ref: 'Reminder',
+      default: null
     }
   })
   

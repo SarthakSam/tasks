@@ -166,7 +166,7 @@ app.get('/bin', (req, res) => {
    } )
 })
 
-app.get("*", (req, res) => {
+app.get("**", (req, res) => {
   res.send({ status: 404, message: "not found" })
 })
 

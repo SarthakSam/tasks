@@ -244,5 +244,6 @@ function deleteNote(card) {
 }
 
 function archive(card) {
-    console.log("archive");
+    let index = +card.getAttribute('data-index');
+    patchNote(cards[index]._id, 'status',  1 );
 }

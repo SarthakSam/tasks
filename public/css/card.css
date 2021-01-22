@@ -69,6 +69,7 @@
     justify-content: space-between;
     opacity: 0;
     cursor: pointer;
+    margin-top: 20px;
 }
 
 .notes .info-card ul.card-buttons > li > i {

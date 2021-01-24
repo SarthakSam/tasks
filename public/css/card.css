@@ -132,4 +132,78 @@
     opacity: 1;
 }
 
+.notes .info-card .labels-menu {
+    position: absolute;
+    /* border: 1px solid var(--placeholder-text-color); */
+    border-radius: 3px;
+    padding: 10px 0;
+    width: 250px;
+    z-index: 5;
+    background-color: var(--background-color);
+    box-shadow: 0 1px 2px 0 rgb(0 0 0 / 60%), 0 2px 6px 2px rgb(0 0 0 / 30%);
+    font-weight: 500;
+    line-height: 30px;
+}
 
+.notes .info-card .labels-menu > p {
+    padding: 0 10px;
+}
+
+.notes .info-card .labels-menu .label-input-container {
+    display: flex;
+    padding: 0 10px;
+}
+
+.notes .info-card .labels-menu .label-input-container .label-input {
+    outline: none;
+    flex: 1;
+    max-width: 200px;
+}
+
+.notes .info-card .labels-menu .label-input-container .label-input:empty::before {
+    content: "Enter label name";
+    color: var(--placeholder-text-color);
+    cursor: text;
+}
+
+.notes .info-card .labels-menu i {
+    /* float: right; */
+    font-size: 0.8rem;
+    margin: 8px 0 0 0;
+    color: var(--placeholder-text-color);
+}
+
+
+.notes .info-card .labels-menu .labels-list {
+    list-style: none;
+}
+
+.notes .info-card .labels-menu .labels-list li {
+    padding: 5px 10px;
+}
+
+.notes .info-card .labels-menu .labels-list li input[type="checkbox"] {
+    display: none;
+}
+
+.notes .info-card .labels-menu .labels-list li:hover {
+    background-color: rgba(154, 160, 166, 0.039);
+}
+
+.notes .info-card .labels-menu .labels-list li input[type="checkbox"] + label {
+    cursor: pointer;
+    display: block;
+}
+
+.notes .info-card .labels-menu .labels-list li input[type="checkbox"] + label:before {
+    content: "\2714";
+    border: 1px solid var(--placeholder-text-color);
+    padding: 0 3px;
+    margin-right: 10px;
+    /* vertical-align: middle; */
+    color: transparent;
+}
+
+.notes .info-card .labels-menu .labels-list li input[type="checkbox"]:checked + label:before {
+    color: var(--placeholder-text-color);
+}

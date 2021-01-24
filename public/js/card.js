@@ -236,6 +236,59 @@ function createMenu(card) {
 
 function addLabel(card) {
     console.log("label addded");
+    const div = document.createElement("div");
+    div.classList.add("labels-menu");
+
+    let p1 = document.createElement("p");
+    p1.innerHTML = "Label note";
+    div.appendChild(p1);
+
+    
+    let labelInputContainer = document.createElement("div");
+    labelInputContainer.classList.add("label-input-container");
+    div.appendChild(labelInputContainer);
+
+    let p2 = document.createElement("p");
+    // p2.innerHTML = "Label note";
+    p2.setAttribute("contenteditable", true);
+    p2.classList.add("label-input");
+    labelInputContainer.appendChild(p2);
+    
+    const i = document.createElement("i");
+    i.classList.add("fas");
+    i.classList.add("fa-search");
+    labelInputContainer.appendChild(i);
+
+    let labels = ["coding", "web dev", "project"];
+
+    const ul = document.createElement("ul");
+    ul.classList.add("labels-list")
+    labels.forEach((labelStr, index) => {
+        const li = document.createElement("li");
+        ul.appendChild(li);
+
+        const checkBox = document.createElement("input");
+        const id = `check-${index}`;
+        checkBox.id = id;
+        li.appendChild(checkBox);
+        checkBox.setAttribute("type", "checkbox");
+
+        const label = document.createElement("label");
+        label.setAttribute("for", id);
+        label.innerHTML = labelStr;
+        li.appendChild(label);
+
+        // const span = document.createElement("span");
+        // span.innerHTML = labelStr;
+
+        // li.appendChild(span);
+    });
+    div.appendChild(ul);
+
+    let iconsList = card.lastChild;
+    iconsList.style.opacity = "1";
+    const menuIcon = iconsList.lastChild;
+    menuIcon.appendChild(div);
 }
 
 function deleteNote(card) {

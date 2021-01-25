@@ -2,7 +2,7 @@ section.container header.input-header {
     border: 0.5px solid var(--placeholder-text-color);
     min-width: 300px;
     box-sizing: border-box;
-    width: 50vw;
+    width: 40vw;
     margin: auto;
     margin-top: 10px;
     color: var(--color);

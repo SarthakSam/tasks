@@ -154,6 +154,7 @@ function capitalize(string) {
 
 document.addEventListener('click', (event) => {
     removeMenuAndListOpacity();
+    removeLabelsMenu(event);
     if( container.contains( event.target ) && event.target !== container) {
        if( event.target.classList.contains("fa-thumbtack") ) {
             let val = event.target.getAttribute("data-value");
@@ -162,7 +163,6 @@ document.addEventListener('click', (event) => {
             patchNote(cards[index]._id, 'isPinned', val == "pin" );
        }
        else if( event.target.classList.contains("fa-ellipsis-v") ) {
-            console.log("open menu");
             let iconsList = event.target.parentNode.parentNode;
             iconsList.classList.add("focus");
             event.target.parentNode.appendChild(createMenu(iconsList.parentNode))
@@ -199,6 +199,14 @@ function removeMenuAndListOpacity() {
     iconsList.classList.remove("focus");
 }
 
+function removeLabelsMenu(event) {
+    const labelsMenu = document.querySelector(".info-card .labels-menu");
+    if( labelsMenu && !labelsMenu.contains(event.target) && event.target.innerText !== "Add Label") {
+        labelsMenu.parentNode.removeChild(labelsMenu);
+    }
+    return;
+}
+
 function switchisPinned(elem, val) {
     if(val) {
         elem.classList.add("active");
@@ -216,7 +224,7 @@ function createMenu(card) {
     div.appendChild(ul);
     const menuItems = [
         { 
-            label: "Add Label", action: addLabel
+            label: "Add Label", action: renderLabelMenu
         },
         { 
             label: "Delete Note", action: deleteNote
@@ -234,7 +242,7 @@ function createMenu(card) {
     return div;
 }
 
-function addLabel(card) {
+function renderLabelMenu(card) {
     console.log("label addded");
     const div = document.createElement("div");
     div.classList.add("labels-menu");
@@ -252,6 +260,7 @@ function addLabel(card) {
     // p2.innerHTML = "Label note";
     p2.setAttribute("contenteditable", true);
     p2.classList.add("label-input");
+    p2.onkeyup = newLabelAndFilterLabels;
     labelInputContainer.appendChild(p2);
     
     const i = document.createElement("i");
@@ -277,11 +286,6 @@ function addLabel(card) {
         label.setAttribute("for", id);
         label.innerHTML = labelStr;
         li.appendChild(label);
-
-        // const span = document.createElement("span");
-        // span.innerHTML = labelStr;
-
-        // li.appendChild(span);
     });
     div.appendChild(ul);
 
@@ -289,6 +293,29 @@ function addLabel(card) {
     iconsList.style.opacity = "1";
     const menuIcon = iconsList.lastChild;
     menuIcon.appendChild(div);
+}
+
+function newLabelAndFilterLabels(event) {
+    const labelsMenu = document.querySelector(".info-card .labels-menu");
+    const newLabelButton = document.querySelector(".info-card .labels-menu button.new-label");
+    if(event.target.innerText.length == 0) {
+        if(newLabelButton) {
+            labelsMenu.removeChild(newLabelButton);
+        }
+    }
+    else {
+        if( !newLabelButton ) {
+            const button = document.createElement("button");
+            button.innerHTML = "<i class='fa fa-plus'></i> Create label";
+            button.classList.add("new-label");
+            button.onclick = createNewLabel();
+            labelsMenu.appendChild(button);
+        }
+    }
+}
+
+function createNewLabel() {
+    console.log("label added to db");
 }
 
 function deleteNote(card) {

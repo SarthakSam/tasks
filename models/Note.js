@@ -13,7 +13,11 @@ const noteSchema = new mongoose.Schema({
       type: mongoose.Schema.Types.ObjectId,
       ref: 'Reminder',
       default: null
-    }
+    },
+    labels: [{
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Label"
+    }]
   })
   
 const Note = mongoose.model("Note", noteSchema);

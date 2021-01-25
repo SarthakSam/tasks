@@ -2,11 +2,11 @@ const express = require('express'),
       app = express(),
       bodyParser = require('body-parser'),
       mongoose = require('mongoose'),
-      path = require('path')
-      fs = require('fs');
-      Reminder = require('./models/Reminder');
-      Note = require("./models/Note");
-      
+      fs = require('fs'),
+      Reminder = require('./models/Reminder'),
+      Note = require("./models/Note"),
+      Label = require("./models/Label");
+
 mongoose.connect('mongodb://localhost/tasks', {useNewUrlParser: true, useUnifiedTopology: true});
       
 app.use(express.static('public'))
@@ -118,6 +118,63 @@ app.delete('/notes/:id', (req, res) => {
       })
     }
   });
+})
+
+app.get('/labels', (req, res) => {
+    Label.find({}).then( labels => {
+      console.log(labels);
+      res.send({ status: 200, labels, message: "labels loaded successfully" });
+    }).catch(err => {
+      console.log("error while fetching labels from db", err);
+      res.send( { status: 400, message: "error while fetching labels" });
+    })
+});
+
+app.post('/labels', (req, res) => {
+    Label.create( { labelText: req.body['label'] }, (err, label) => {
+      if(err) {
+        console.log("Error while saving label", err);
+        res.send({ status: 400, message: "Unable to save label"});
+      } 
+      else {
+        Note.findById( req.body.id, ( err, note) => {
+          if(err) {
+            console.log("Something went wrong while fetching note in post /labels", err);
+            res.send({
+              status: 400, message: err
+            });
+          }
+          else {
+            note.labels.push(label);
+            note.save( (err, note) => {
+              if(err) {
+                console.log("Something went wrong while saving label in note", err);
+                res.send({
+                  status: 400, message: "Unable to save label in note"
+                });
+              }
+              else {
+                res.send({
+                  status: 200, message: "Label saved succesfully"
+                });
+              }
+            } );
+          }
+        }) 
+      }    
+    } );
+});
+
+app.get('/labels/:id', (req, res) => {
+  Note.find( {labels: req.params.id}, (err, notes) => {
+    if(err) {
+      console.log(err);
+    }
+    else {
+      console.log(notes);
+    }
+    res.send("hi");
+  })
 })
 
 app.get('/reminders', (req, res) => {

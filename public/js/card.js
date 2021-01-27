@@ -1,4 +1,5 @@
-import {patchNote, _deleteNote} from './index.js';
+import {patchNote, _deleteNote, postData } from './index.js';
+import { errorMessage, successMessage } from './message.js';
 
 const infoCardWidth = 300;
 const totalCardsInRow = 4;
@@ -308,14 +309,32 @@ function newLabelAndFilterLabels(event) {
             const button = document.createElement("button");
             button.innerHTML = "<i class='fa fa-plus'></i> Create label";
             button.classList.add("new-label");
-            button.onclick = createNewLabel();
+            button.onclick = createNewLabel;
             labelsMenu.appendChild(button);
         }
     }
 }
 
+function addLabelToCard( card, label ) {
+    let div = document.createElement("div");
+    div.innerHTML = label.labelText;
+
+}
+
 function createNewLabel() {
-    console.log("label added to db");
+   let newLabel = document.querySelector(".info-card .labels-menu .label-input-container .label-input");
+   const card = newLabel.parentNode.parentNode.parentNode.parentNode.parentNode;
+   if(newLabel) {
+       postData( "labels", { id: cards[+card.getAttribute("data-index")]._id, label: newLabel.innerText })
+       .then( res => res.json() )
+       .then( res => {
+            successMessage(res.message);
+            addLabelToCard(card, res.label);
+       })
+       .catch(err => {
+           errorMessage(err.message);
+       })
+   } 
 }
 
 function deleteNote(card) {

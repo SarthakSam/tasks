@@ -99,6 +99,17 @@ export function _deleteNote(id) {
     })
 }
 
+export function postData(urlEnd, body) {
+    let url = document.location.origin + "/" + urlEnd;
+    return fetch(url, {
+        body: JSON.stringify(body),
+        method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+    });
+}
+
 function init() {
     getNotes("notes");
 }

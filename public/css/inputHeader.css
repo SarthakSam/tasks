@@ -236,11 +236,11 @@ section.container header.input-header .input-tab  div.images-section ul.uploaded
     height: 200px;
 }
 
-section.container header.input-header .input-tab div.reminder-collaborator-section {
+section.container header.input-header .input-tab div.reminder-collaborator-label-info-section {
     padding: 10px 20px;
 }
 
-section.container header.input-header .input-tab div.reminder-collaborator-section span.reminder-info {
+section.container header.input-header .input-tab div.reminder-collaborator-label-info-section span.reminder-info {
     border: 0.7px solid var(--placeholder-text-color);
     padding: 4px 8px;
     border-radius: 20px;
@@ -248,15 +248,15 @@ section.container header.input-header .input-tab div.reminder-collaborator-secti
     font-weight: 500;
 }
 
-section.container header.input-header .input-tab div.reminder-collaborator-section span.reminder-info i {
+section.container header.input-header .input-tab div.reminder-collaborator-label-info-section span.reminder-info i {
     padding: 2px 6px;
 }
 
-section.container header.input-header .input-tab div.reminder-collaborator-section span.reminder-info .clearReminder {
+section.container header.input-header .input-tab div.reminder-collaborator-label-info-section span.reminder-info .clearReminder {
     padding-left: 14px;
     opacity: 0;
 }
 
-section.container header.input-header .input-tab div.reminder-collaborator-section span.reminder-info:hover > .clearReminder {
+section.container header.input-header .input-tab div.reminder-collaborator-label-info-section span.reminder-info:hover > .clearReminder {
     opacity: 1;
 }

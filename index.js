@@ -155,7 +155,7 @@ app.post('/labels', (req, res) => {
               }
               else {
                 res.send({
-                  status: 200, message: "Label saved succesfully"
+                  status: 200, message: "Label saved succesfully", label
                 });
               }
             } );

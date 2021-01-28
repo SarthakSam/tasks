@@ -1,4 +1,4 @@
-import {patchNote, _deleteNote, postData } from './index.js';
+import {patchNote, _deleteNote, postData, patchData } from './index.js';
 import { errorMessage, successMessage } from './message.js';
 
 const infoCardWidth = 300;
@@ -361,16 +361,27 @@ function getLabelElement( label ) {
 
 function createNewLabel() {
    let newLabel = document.querySelector(".info-card .labels-menu .label-input-container .label-input");
-   const card = newLabel.parentNode.parentNode.parentNode.parentNode.parentNode;
+   const cardElem = newLabel.parentNode.parentNode.parentNode.parentNode.parentNode;
+   const card = cards[+cardElem.getAttribute("data-index")];
    if(newLabel) {
-       postData( "labels", { id: cards[+card.getAttribute("data-index")]._id, label: newLabel.innerText })
+       postData( "labels", { id: card._id, label: newLabel.innerText })
        .then( res => res.json() )
-       .then( res => {
-            successMessage(res.message);
-            cards[+card.getAttribute("data-index")].labels.push(res.label);
-            saveChangesInStore('cards', +card.getAttribute("data-index"), { ...cards[+card.getAttribute("data-index")] });
-            initializeCardsData();
-            addLabelToCard(card, res.label);
+       .then( res1 => {
+           if(res1.status == 200) {
+               let labels = card.labels.map(label => label._id);
+               let label = res1.label;
+               labels.push(label);
+               patchData( `notes/${ card._id }` , { labels } )
+               .then( res => res.json() )
+               .then( res2 => {
+                   successMessage(res2.message);
+                   card.labels.push(label);
+                   saveChangesInStore('cards', +cardElem.getAttribute("data-index"), { ...cards[+cardElem.getAttribute("data-index")] });
+                   initializeCardsData();
+                   addLabelToCard(cardElem, label);
+               })
+           }
+            
        })
        .catch(err => {
            errorMessage(err.message);

@@ -110,6 +110,18 @@ export function postData(urlEnd, body) {
     });
 }
 
+export function patchData(urlEnd, body) {
+    let url = document.location.origin + "/" + urlEnd;
+    return fetch(url, {
+        body: JSON.stringify(body),
+        method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+    });
+}
+
+
 function init() {
     getNotes("notes");
 }

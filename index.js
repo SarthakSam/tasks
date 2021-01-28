@@ -137,30 +137,33 @@ app.post('/labels', (req, res) => {
         res.send({ status: 400, message: "Unable to save label"});
       } 
       else {
-        Note.findById( req.body.id, ( err, note) => {
-          if(err) {
-            console.log("Something went wrong while fetching note in post /labels", err);
-            res.send({
-              status: 400, message: err
-            });
-          }
-          else {
-            note.labels.push(label);
-            note.save( (err, note) => {
-              if(err) {
-                console.log("Something went wrong while saving label in note", err);
-                res.send({
-                  status: 400, message: "Unable to save label in note"
+        res.send({
+                    status: 200, message: "Label saved succesfully", label
                 });
-              }
-              else {
-                res.send({
-                  status: 200, message: "Label saved succesfully", label
-                });
-              }
-            } );
-          }
-        }) 
+        // Note.findById( req.body.id, ( err, note) => {
+        //   if(err) {
+        //     console.log("Something went wrong while fetching note in post /labels", err);
+        //     res.send({
+        //       status: 400, message: err
+        //     });
+        //   }
+        //   else {
+        //     note.labels.push(label);
+        //     note.save( (err, note) => {
+        //       if(err) {
+        //         console.log("Something went wrong while saving label in note", err);
+        //         res.send({
+        //           status: 400, message: "Unable to save label in note"
+        //         });
+        //       }
+        //       else {
+        //         res.send({
+        //           status: 200, message: "Label saved succesfully", label
+        //         });
+        //       }
+        //     } );
+        //   }
+        // }) 
       }    
     } );
 });

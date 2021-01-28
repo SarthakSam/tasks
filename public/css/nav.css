@@ -51,6 +51,7 @@ aside.sidebar {
     top: 70px;
     height: 100vh;
     padding-top: 10px;
+    overflow: scroll;
     /* background-color: var(--background-color); */
 }
 
@@ -107,3 +108,11 @@ aside.sidebar ul li:hover span {
 #sidebar-btn:checked ~ aside.sidebar ul li span{
     left: 60px;
 }
+
+aside::-webkit-scrollbar {
+    width: 10px;
+  }
+     
+aside:hover::-webkit-scrollbar-thumb {
+    background: var(--color); 
+  }  

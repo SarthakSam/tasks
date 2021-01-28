@@ -15,3 +15,22 @@ function removeClass(list, className) {
         element.classList.remove(className);
     });
 }
+
+export function createLabelTabs( ) {
+    let labels = JSON.parse( localStorage.getItem('labels') );
+    const fragment = document.createDocumentFragment();
+    const ul = document.querySelector("aside.sidebar").childNodes[1];
+
+    labels.forEach( label => {
+        const li = document.createElement("li");
+        li.setAttribute("data-value", `labels/${label._id}`);
+        li.innerHTML = "<i class='fas fa-tag'></i>"
+
+        const span = document.createElement("span");
+        span.innerText = label.labelText;
+        li.appendChild(span);
+        fragment.appendChild(li);
+    })
+
+    ul.insertBefore(fragment, ul.children[2]);
+}

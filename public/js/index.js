@@ -1,5 +1,6 @@
 import {successMessage, errorMessage, warningMessage} from './message.js';
 import { renderData } from './card.js'
+import { createLabelTabs } from './sidenav.js';
 
 export function getNotes(urlEnd) {
     fetch("http://localhost:3000/" + urlEnd)
@@ -99,6 +100,12 @@ export function _deleteNote(id) {
     })
 }
 
+export function getData(urlEnd) {
+    let url = document.location.origin + "/" + urlEnd;
+    return fetch(url);
+}
+
+
 export function postData(urlEnd, body) {
     let url = document.location.origin + "/" + urlEnd;
     return fetch(url, {
@@ -123,6 +130,10 @@ export function patchData(urlEnd, body) {
 
 
 function init() {
+    getData('labels').then( res => res.json()).then( res => {
+        localStorage.setItem('labels', JSON.stringify( res.labels ) );
+        createLabelTabs();
+    });
     getNotes("notes");
 }
 

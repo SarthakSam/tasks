@@ -21,7 +21,7 @@ app.use(bodyParser.urlencoded({limit: '50mb', extended: true}));
 // })();
 
 app.get('/notes', (req, res) => {
-  Note.find({  status: 0}).populate("reminder").exec( (err, notes) => {
+  Note.find({  status: 0}).populate("reminder").populate("labels").exec( (err, notes) => {
       if(err) {
         console.log("something went wrong in /notes");
         res.send({ status: 400, message: "Something went wrong" });

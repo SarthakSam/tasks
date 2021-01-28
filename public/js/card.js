@@ -8,8 +8,17 @@ const verticalMarginBetCards = 10;
 const container = document.querySelector("main.notes");
 let cards = [];
 
-function renderCards() {
+function initializeCardsData() {
     cards = localStorage.getItem('notes')? JSON.parse(localStorage.getItem('notes')): [];
+}
+
+function saveChangesInStore(index, card) {
+    cards[index] = card;
+    localStorage.setItem('notes', JSON.stringify(cards) );
+}
+
+function renderCards() {
+    initializeCardsData();
     let pinnedTask = cards.filter( card => card.isPinned);
     let unpinnedTask = cards.filter( card => !card.isPinned);
     cards = [...pinnedTask, ...unpinnedTask];
@@ -80,7 +89,17 @@ function createTaskCard( task ) {
     div.classList.add("info-card");
     if(task.reminder && task.reminder.date)
         div.append( getReminderElement( task.reminder ) );
+    div.appendChild( getLabel(task.labels) );
     div.appendChild( getCardButtons() );
+    return div;
+}
+
+function getLabel(labels=[]) {
+    const div = document.createElement('div');
+    div.classList.add("label-info-container");
+    labels.forEach( label => {
+        div.appendChild( getLabelElement(label) );
+    });
     return div;
 }
 
@@ -272,6 +291,7 @@ function renderLabelMenu(card) {
     let labels = ["coding", "web dev", "project"];
 
     const ul = document.createElement("ul");
+    ul.onclick = labelSelected;
     ul.classList.add("labels-list")
     labels.forEach((labelStr, index) => {
         const li = document.createElement("li");
@@ -296,6 +316,12 @@ function renderLabelMenu(card) {
     menuIcon.appendChild(div);
 }
 
+function labelSelected(event) {
+    if(event.target.nodeName === "INPUT") {
+        console.log(event.target)
+    }
+}
+
 function newLabelAndFilterLabels(event) {
     const labelsMenu = document.querySelector(".info-card .labels-menu");
     const newLabelButton = document.querySelector(".info-card .labels-menu button.new-label");
@@ -316,9 +342,21 @@ function newLabelAndFilterLabels(event) {
 }
 
 function addLabelToCard( card, label ) {
-    let div = document.createElement("div");
-    div.innerHTML = label.labelText;
+    let container = null;
+    for(let child of card.childNodes) {
+        if( child.classList.contains("label-info-container")) {
+            container = child;
+            break;
+        }
+    }
+    container.appendChild( getLabelElement( label ) );
+}
 
+function getLabelElement( label ) {
+    let labelInfoElem = document.createElement('div');
+    labelInfoElem.classList.add('label-info')
+    labelInfoElem.innerHTML = `<span> ${label.labelText} </span><i class = "fa fa-times clearLabel"></i>`
+    return labelInfoElem;
 }
 
 function createNewLabel() {
@@ -329,6 +367,9 @@ function createNewLabel() {
        .then( res => res.json() )
        .then( res => {
             successMessage(res.message);
+            cards[+card.getAttribute("data-index")].labels.push(res.label);
+            saveChangesInStore('cards', +card.getAttribute("data-index"), { ...cards[+card.getAttribute("data-index")] });
+            initializeCardsData();
             addLabelToCard(card, res.label);
        })
        .catch(err => {

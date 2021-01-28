@@ -223,3 +223,57 @@
 .notes .info-card .labels-menu button.new-label i.fa-plus {
     color: var(--color);
 }
+
+.notes .info-card .label-info-container {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.notes .info-card .label-info {
+    border: 0.7px solid var(--placeholder-text-color);
+    padding: 3px 5px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    margin: 2px;
+    display: flex;
+    justify-content: center;
+    cursor: pointer;
+    min-width: 45px;
+    position: relative;
+}
+
+.notes .info-card .label-info:hover {
+    justify-content: flex-start;
+}
+
+/* .notes .info-card .label-info span {
+    text-align: center;
+} */
+
+.notes .info-card .label-info:hover > span {
+   width: calc(100% - 12px);
+   text-overflow: ellipsis;
+   white-space: nowrap;
+   overflow: hidden;
+   /* padding: 0 3px; */
+   /* min-width: 0px; */
+}
+
+.notes .info-card .label-info .clearLabel {
+    line-height: 1.2rem;
+    display: none;
+    width: 15px;
+    text-align: center;
+    border-radius: 50%;
+    position: absolute;
+    right: 3px;
+}
+
+.notes .info-card .label-info .clearLabel:hover  {
+    background-color: rgba(250, 250, 250, 0.3);
+}
+
+.notes .info-card .label-info:hover > .clearLabel {
+    display: block;
+}

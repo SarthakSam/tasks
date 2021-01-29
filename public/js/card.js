@@ -288,12 +288,12 @@ function renderLabelMenu(card) {
     i.classList.add("fa-search");
     labelInputContainer.appendChild(i);
 
-    let labels = ["coding", "web dev", "project"];
+    let labels = JSON.parse(localStorage.getItem('labels'));
 
     const ul = document.createElement("ul");
     ul.onclick = labelSelected;
     ul.classList.add("labels-list")
-    labels.forEach((labelStr, index) => {
+    labels.forEach((labelObj, index) => {
         const li = document.createElement("li");
         ul.appendChild(li);
 
@@ -305,7 +305,7 @@ function renderLabelMenu(card) {
 
         const label = document.createElement("label");
         label.setAttribute("for", id);
-        label.innerHTML = labelStr;
+        label.innerHTML = labelObj.labelText;
         li.appendChild(label);
     });
     div.appendChild(ul);

@@ -176,6 +176,12 @@
 
 .notes .info-card .labels-menu .labels-list {
     list-style: none;
+    height: 180px;
+    overflow-y: scroll;
+}
+
+.notes .info-card .labels-menu .labels-list::-webkit-scrollbar {
+    width: 0;
 }
 
 .notes .info-card .labels-menu .labels-list li {

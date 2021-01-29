@@ -122,7 +122,6 @@ app.delete('/notes/:id', (req, res) => {
 
 app.get('/labels', (req, res) => {
     Label.find({}).then( labels => {
-      console.log(labels);
       res.send({ status: 200, labels, message: "labels loaded successfully" });
     }).catch(err => {
       console.log("error while fetching labels from db", err);
@@ -169,19 +168,19 @@ app.post('/labels', (req, res) => {
 });
 
 app.get('/labels/:id', (req, res) => {
-  Note.find( {labels: req.params.id}, (err, notes) => {
+  Note.find( {labels: req.params.id} ).populate("reminder").populate("labels").exec( (err, notes) => {
     if(err) {
-      console.log(err);
+      console.log("error in labels/id", err);
+      res.send({ status: 400, message: "unable to get tasks with this label"});
     }
     else {
-      console.log(notes);
+      res.send( {status: 200, notes} );
     }
-    res.send("hi");
   })
 })
 
 app.get('/reminders', (req, res) => {
-  Note.find({reminder: { $ne: null } }).populate("reminder").exec( (err, notes) => {
+  Note.find({reminder: { $ne: null } }).populate("reminder").populate("labels").exec( (err, notes) => {
     if(err) {
       console.log("something went wrong in /notes");
       res.send({ status: 400, message: "Something went wrong" });

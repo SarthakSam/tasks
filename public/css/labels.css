@@ -1,0 +1,29 @@
+
+#labels:target {
+    display: block;
+}
+
+#labels > .popup {
+    width: 300px;
+}
+
+#labels .popup .popup-footer {
+    border-top: 1px solid #5f6368;
+    height: 70px;
+}
+
+#labels .popup .popup-footer .close-popup-btn {
+    color: var(--color);
+    background-color: inherit;
+    outline: none;
+    border: none;
+    float: right;
+    margin: 15px 20px 0 0;
+    padding: 10px;
+    border-radius: 5px;
+    /* font-family: 'Google Sans',Roboto,Arial,sans-serif */
+}
+
+#labels .popup .popup-footer .close-popup-btn:hover {
+    background-color: rgba(154, 160, 166, 0.039);
+}

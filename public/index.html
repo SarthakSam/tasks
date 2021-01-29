@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="./css/card.css">
     <link rel="stylesheet" href="./css/inputHeader.css">
     <link rel="stylesheet" href="./css/message.css">
+    <link rel="stylesheet" href="./css/labels.css">
 </head>
 <body>
     <input type="checkbox" id="sidebar-btn" checked>
@@ -28,7 +29,9 @@
                 <i class="fas fa-redo-alt"></i>
             </li>
             <li>
-                <i class="fas fa-tags"></i>
+                <a href="#labels">
+                    <i class="fas fa-tags"></i>
+                </a>
             </li>
             <li>
                 <div class="username">
@@ -153,7 +156,7 @@
         </header>
         <main class="notes">
 
-        </main>
+        </main> -->
     </section>
     <script type="module" src="./js/card.js"></script>
     <script type="module" src="./js/sidenav.js"></script>
@@ -161,5 +164,12 @@
     <script type="module" src="./js/index.js"></script>
     <script type="module" src="./js/labels.js"></script>
     
+    <div class="popup-container" id="labels">
+        <div class="popup">
+            <div class="popup-body"></div>
+            <div class="popup-footer"></div>
+        </div>
+    </div>
+
 </body>
 </html>

@@ -6,10 +6,18 @@ labelPopupButton.onclick = () => {
     renderLabelsPopup();
 }
 
+// common functionality
 window.onload = () => {
+    localStorage.setItem('location', document.location.hash.substring(1) );
     if(window.location.hash == '#labels')
         renderLabelsPopup();
 }
+
+document.addEventListener('click', (event) => {
+    if(event.target.classList.contains("popup-container")) {
+        closePopup();
+    }
+})
 
 function renderLabelsPopup() {
     const popupBody = document.querySelector("#labels > .popup > .popup-body");
@@ -17,7 +25,18 @@ function renderLabelsPopup() {
     popupBody.innerHTML = "<p class='title'> Edit Labels </p>";
     popupBody.appendChild( newLabelElement() );
     popupBody.appendChild( existingLabels() );
-    popupFooter.innerHTML = "<button class = 'close-popup-btn'>Done</button>";
+    let button = document.createElement("button");
+    button.classList.add('close-popup-btn');
+    button.innerHTML = 'Done';
+    button.onclick = closePopup;
+    popupFooter.innerHTML = "";
+    popupFooter.appendChild(button);
+    
+}
+
+function closePopup() {
+    let location = localStorage.getItem('location');
+    window.location.hash = `#${ !location || location == 'labels'? '': location}`;
 }
 
 function newLabelElement() {
@@ -48,8 +67,6 @@ function existingLabels() {
     } );
     ul.appendChild(fragment);
     ul.onclick = (event) => {
-        console.log(event.target);
-        
         if( event.target.classList.contains("editable-toggle") ) {
             let activeCheckbox = document.querySelector(".active-checkbox");
             if(activeCheckbox) {

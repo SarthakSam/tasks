@@ -6,6 +6,7 @@ sideNav.addEventListener('click', (event) => {
     removeClass(document.querySelectorAll("aside.sidebar ul li"), "active");
     li.classList.add("active");
     document.location.hash = li.getAttribute("data-value");
+    localStorage.setItem('location', document.location.hash.substring(1) );
     getNotes( li.getAttribute("data-value") );
 })
 

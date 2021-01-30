@@ -112,6 +112,7 @@
 }
 
 #labels .popup .popup-footer .close-popup-btn {
+    text-decoration: none;
     color: var(--color);
     background-color: inherit;
     outline: none;

@@ -12,6 +12,7 @@
     color: white;
     overflow-y: scroll;
     max-height: 65vh;
+    min-height: 300px;
 }
 
 #labels .popup .popup-body::-webkit-scrollbar {
@@ -61,6 +62,7 @@
     margin: 10px 30px;
     font-size: 0.9rem;
     display: inline-block;
+    outline: none;
 }
 
 #labels .popup .popup-body .labels-list li i {

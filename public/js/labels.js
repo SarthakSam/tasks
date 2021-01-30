@@ -38,7 +38,7 @@ function existingLabels() {
             <input type = "checkbox" id = "editable-toggle-${label._id}" class = "editable-toggle">
             <i class="fas fa-tag labelIcon"></i>
             <i class="far fa-trash-alt delete-label-btn"></i>
-            <label class="input-area" for = "editable-toggle-${label._id}">${label.labelText}</label>
+            <label class="input-area" contenteditable for = "editable-toggle-${label._id}">${label.labelText}</label>
             <label for = "editable-toggle-${label._id}">
             <i class="fas fa-pencil-alt edit-label-btn"></i>
             <i class='fas fa-check save-edited-btn'></i>
@@ -48,7 +48,30 @@ function existingLabels() {
     } );
     ul.appendChild(fragment);
     ul.onclick = (event) => {
-        console.log(event);
+        console.log(event.target);
+        
+        if( event.target.classList.contains("editable-toggle") ) {
+            let activeCheckbox = document.querySelector(".active-checkbox");
+            if(activeCheckbox) {
+                activeCheckbox.checked = false;
+                activeCheckbox.classList.remove("active-checkbox");
+            }
+            event.target.classList.add("active-checkbox");
+            let span = null;
+            for( let elem of event.target.parentElement.children) {
+                if( elem.classList.contains("input-area") ) {
+                    span = elem;
+                    break;
+                }
+            }
+            span?.focus();
+        }
+        else if( event.target.classList.contains("delete-label-btn") ) {
+            console.log("existing label deleted");
+        }
+        else if( event.target.classList.contains("save-edited-btn") ) {
+            console.log("label saved");
+        }
     }
 
     return ul;

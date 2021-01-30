@@ -14,22 +14,42 @@ window.onload = () => {
 function renderLabelsPopup() {
     const popupBody = document.querySelector("#labels > .popup > .popup-body");
     const popupFooter = document.querySelector("#labels > .popup > .popup-footer");
-    // popup.innerHTML = "<p class='title'> Edit Labels </p>";
-    // popup.appendChild( newLabelElement() );
-    // popup.appendChild( existingLabels() );
+    popupBody.innerHTML = "<p class='title'> Edit Labels </p>";
+    popupBody.appendChild( newLabelElement() );
+    popupBody.appendChild( existingLabels() );
     popupFooter.innerHTML = "<button class = 'close-popup-btn'>Done</button>";
 }
 
 function newLabelElement() {
     const div = document.createElement("div");
-    div.innerHTML = "<i class='fas fa-plus'></i><input type='text'>"
+    div.classList.add("new-label-input");
+    div.innerHTML = "<i class='fas fa-plus'></i><input type='text' placeholder = 'Create new label'> <i class='fas fa-check'></i>"
     return div;
 }
 
 function existingLabels() {
-    let labels = localStorage.getItem("labels");
+    let labels = JSON.parse( localStorage.getItem("labels") );
+    const ul = document.createElement('ul');
+    ul.classList.add("labels-list");
     const fragment = document.createDocumentFragment();
     labels.forEach( label => {
         const li = document.createElement("li");
+        li.innerHTML = `
+            <input type = "checkbox" id = "editable-toggle-${label._id}" class = "editable-toggle">
+            <i class="fas fa-tag labelIcon"></i>
+            <i class="far fa-trash-alt delete-label-btn"></i>
+            <label class="input-area" for = "editable-toggle-${label._id}">${label.labelText}</label>
+            <label for = "editable-toggle-${label._id}">
+            <i class="fas fa-pencil-alt edit-label-btn"></i>
+            <i class='fas fa-check save-edited-btn'></i>
+            </label>
+        `;
+        fragment.appendChild(li);
     } );
+    ul.appendChild(fragment);
+    ul.onclick = (event) => {
+        console.log(event);
+    }
+
+    return ul;
 }

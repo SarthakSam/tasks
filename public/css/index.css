@@ -52,7 +52,6 @@ section.container main.notes {
 
 .popup {
     margin: auto;
-    height: 300px;
     background-color: #313235;
     box-shadow: 0 1px 3px 0 rgb(0 0 0 / 60%), 0 4px 8px 3px rgb(0 0 0 / 30%);
     top: 50vh;

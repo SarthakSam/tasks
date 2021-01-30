@@ -7,9 +7,106 @@
     width: 300px;
 }
 
+#labels .popup .popup-body {
+    padding: 15px;
+    color: white;
+    overflow-y: scroll;
+    max-height: 65vh;
+}
+
+#labels .popup .popup-body::-webkit-scrollbar {
+    width: 10px;
+}
+
+#labels .popup .popup-body::-webkit-scrollbar-thumb {
+    background-color: grey;
+}
+
+#labels .popup .popup-body div.new-label-input {
+    margin: 10px 0;
+}
+
+#labels .popup .popup-body div.new-label-input i {
+    color: grey;
+    font-weight: 600;
+}
+
+#labels .popup .popup-body div.new-label-input input[type = "text"] {
+    background: inherit;
+    outline: none;
+    border: none;
+    margin: 10px 30px;
+    color: #e8eaed;
+}
+
+#labels .popup .popup-body div.new-label-input input[type = "text"]:focus {
+    border-bottom: 1px solid #5f6368;
+}
+
+#labels .popup .popup-body div.new-label-input input[type = "text"]::placeholder {
+    color:grey;
+    font-weight: 600;
+}
+
+#labels .popup .popup-body .labels-list {
+    list-style: none;
+}
+
+#labels .popup .popup-body .labels-list li {
+    margin: 10px 0;
+}
+
+#labels .popup .popup-body .labels-list li label.input-area {
+    width: 160px;
+    margin: 10px 30px;
+    font-size: 0.9rem;
+    display: inline-block;
+}
+
+#labels .popup .popup-body .labels-list li i {
+    color: grey;
+    font-weight: 600;
+}
+
+#labels .popup .popup-body .labels-list li:hover .labelIcon {
+    display: none;
+}
+
+#labels .popup .popup-body .labels-list li .delete-label-btn {
+    display: none;
+}
+
+#labels .popup .popup-body .labels-list li:hover .delete-label-btn {
+    display: initial;
+    width: 18px;
+}
+
+#labels .popup .popup-body .labels-list li .edit-label-btn {
+    display: initial;
+}
+
+#labels .popup .popup-body .labels-list li .save-edited-btn {
+    display: none;
+}
+
+#labels .popup .popup-body .labels-list li .editable-toggle {
+    display: none;
+}
+
+#labels .popup .popup-body .labels-list li .editable-toggle:checked ~ label > .edit-label-btn {
+    display: none;
+}
+
+#labels .popup .popup-body .labels-list li .editable-toggle:checked ~ label > .save-edited-btn {
+    display: initial;
+}
+
 #labels .popup .popup-footer {
     border-top: 1px solid #5f6368;
-    height: 70px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
 }
 
 #labels .popup .popup-footer .close-popup-btn {
@@ -17,9 +114,8 @@
     background-color: inherit;
     outline: none;
     border: none;
-    float: right;
-    margin: 15px 20px 0 0;
-    padding: 10px;
+    margin-right: 20px;
+    padding: 10px 20px;
     border-radius: 5px;
     /* font-family: 'Google Sans',Roboto,Arial,sans-serif */
 }

@@ -1,4 +1,4 @@
-import { getData, postData, deleteData } from './index.js';
+import { getData, postData, deleteData, patchData } from './index.js';
 import { createLabelTabs } from './sidenav.js'
 import { errorMessage, successMessage } from "./message.js";
 
@@ -123,10 +123,27 @@ function existingLabels() {
             .then( res => res.json())
             .then( res => {
                 reloadLabelsAndLabelsPopup(res);
-            });
+            })
+            .catch( err => errorMessage(err.message));
         }
         else if( event.target.classList.contains("save-edited-btn") ) {
-            console.log("label saved");
+            let span = null;
+            for( let elem of event.target.parentElement.parentElement.children) {
+                if( elem.classList.contains("input-area") ) {
+                    span = elem;
+                    break;
+                }
+            }
+            
+            let body = {
+                labelText: span?.innerText
+            }
+            patchData(`labels/${ event.target.parentElement.parentElement.getAttribute('data-value') }`, body)
+            .then( res => res.json())
+            .then( res => {
+                reloadLabelsAndLabelsPopup(res);
+            })
+            .catch( err => errorMessage(err.message));
         }
     }
 

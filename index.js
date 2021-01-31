@@ -179,6 +179,19 @@ app.get('/labels/:id', (req, res) => {
   })
 })
 
+app.patch('/labels/:id', (req, res) => {
+  Label.findByIdAndUpdate( req.params.id, req.body, (err, newLabel) => {
+      if(err) {
+        console.log("unable to edit label", err);
+        res.send({ status: 400, message: "Unable to edit label"});
+      }
+      else {
+        res.send( {status: 200, newLabel, message: "Label saved successfully"} );
+      }
+  })
+})
+
+
 app.delete('/labels/:id', (req, res) => {
 
     Note.updateMany( { labels: req.params.id }, { $pullAll: { labels: [ req.params.id ] } }, (err, notes) => {

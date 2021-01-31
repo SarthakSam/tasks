@@ -100,11 +100,11 @@
     display: none;
 }
 
-#labels .popup .popup-body .labels-list li .editable-toggle:checked ~ label > .edit-label-btn {
+#labels .popup .popup-body .labels-list li .active-checkbox ~ label > .edit-label-btn {
     display: none;
 }
 
-#labels .popup .popup-body .labels-list li .editable-toggle:checked ~ label > .save-edited-btn {
+#labels .popup .popup-body .labels-list li .active-checkbox ~ label > .save-edited-btn {
     display: initial;
 }
 

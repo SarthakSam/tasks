@@ -35,8 +35,9 @@
 #labels .popup .popup-body div.new-label-input input[type = "text"] {
     background: inherit;
     outline: none;
+    width: 160px;
     border: none;
-    margin: 10px 30px;
+    margin: 10px 35px;
     color: #e8eaed;
 }
 
@@ -47,6 +48,10 @@
 #labels .popup .popup-body div.new-label-input input[type = "text"]::placeholder {
     color:grey;
     font-weight: 600;
+}
+
+#labels .popup .popup-body div.new-label-input .new-label-btn {
+    opacity: 0;
 }
 
 #labels .popup .popup-body .labels-list {

@@ -1,4 +1,6 @@
-// import { getData } from './index.js';
+import { getData, postData, deleteData } from './index.js';
+import { createLabelTabs } from './sidenav.js'
+import { errorMessage, successMessage } from "./message.js";
 
 const labelPopupButton = document.querySelector(".navbar .nav-list .fa-tags");
 
@@ -25,6 +27,7 @@ function renderLabelsPopup() {
     popupBody.innerHTML = "<p class='title'> Edit Labels </p>";
     popupBody.appendChild( newLabelElement() );
     popupBody.appendChild( existingLabels() );
+    
     let button = document.createElement("button");
     button.classList.add('close-popup-btn');
     button.innerHTML = 'Done';
@@ -42,7 +45,38 @@ function closePopup() {
 function newLabelElement() {
     const div = document.createElement("div");
     div.classList.add("new-label-input");
-    div.innerHTML = "<i class='fas fa-plus'></i><input type='text' placeholder = 'Create new label'> <i class='fas fa-check'></i>"
+    div.innerHTML = "<i class='fas fa-plus'></i>";
+    
+    let input = document.createElement("input");
+    input.setAttribute("type", "text");
+    input.setAttribute("placeholder", "Create new label");
+
+    let saveButton = document.createElement("i");
+    saveButton.classList.add("fas");
+    saveButton.classList.add("fa-check");
+    saveButton.classList.add("new-label-btn");
+
+    input.onkeyup = (event) => {
+        if(event.target.value.length == 0) {
+            saveButton.style.opacity = 0;
+        }
+        else {
+            saveButton.style.opacity = 1;
+        }
+        // console.log(event.target.value);
+    }
+
+    saveButton.onclick = () => {
+        postData( "labels", { label: input.value })
+        .then( res => res.json() )
+        .then( res => {
+            reloadLabelsAndLabelsPopup( res );
+        })
+        .catch(err => errorMessage(err));
+    }
+
+    div.appendChild(input);
+    div.appendChild(saveButton);
     return div;
 }
 
@@ -63,6 +97,7 @@ function existingLabels() {
             <i class='fas fa-check save-edited-btn'></i>
             </label>
         `;
+        li.setAttribute('data-value', label._id);
         fragment.appendChild(li);
     } );
     ul.appendChild(fragment);
@@ -84,7 +119,11 @@ function existingLabels() {
             span?.focus();
         }
         else if( event.target.classList.contains("delete-label-btn") ) {
-            console.log("existing label deleted");
+            deleteData(`labels/${ event.target.parentElement.getAttribute('data-value') }`)
+            .then( res => res.json())
+            .then( res => {
+                reloadLabelsAndLabelsPopup(res);
+            });
         }
         else if( event.target.classList.contains("save-edited-btn") ) {
             console.log("label saved");
@@ -92,4 +131,18 @@ function existingLabels() {
     }
 
     return ul;
+}
+
+function reloadLabelsAndLabelsPopup(res) {
+    if(res.status == 200) {
+        successMessage(res.message);
+        getData('labels').then( res => res.json()).then( res => {
+            localStorage.setItem('labels', JSON.stringify( res.labels ) );
+            createLabelTabs();
+            renderLabelsPopup();
+        });
+    }
+    else {
+        errorMessage(res.message);
+    }
 }

@@ -179,6 +179,36 @@ app.get('/labels/:id', (req, res) => {
   })
 })
 
+app.delete('/labels/:id', (req, res) => {
+
+    Note.updateMany( { labels: req.params.id }, { $pullAll: { labels: [ req.params.id ] } }, (err, notes) => {
+        if(err) {
+          console.log("error while finding notes with this label", err);
+          res.send({ status: 400, message: "error while finding notes with this label"});
+        }
+        else {
+          Label.findByIdAndDelete( req.params.id, (err, label) => {
+              if(err) {
+                console.log("error while deleting label", err);
+                res.send({ status: 400, message: "error while deleting label"});
+              }
+              else {
+                res.send({ status: 200, message: 'label deleted succesfully' });
+              }
+          });
+        }
+    });  
+    // Note.find( { labels: req.params.id } ).populate("labels").exec( ( err, notes ) => {
+    //     if(err) {
+    //       console.log("error while finding notes with this label", err);
+    //       res.send({ status: 400, message: "error while finding notes with this label"});
+    //     }
+    //     else {
+    //        notes.
+    //     }
+    // } );
+});
+
 app.get('/reminders', (req, res) => {
   Note.find({reminder: { $ne: null } }).populate("reminder").populate("labels").exec( (err, notes) => {
     if(err) {

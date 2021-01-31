@@ -128,6 +128,17 @@ export function patchData(urlEnd, body) {
     });
 }
 
+export function deleteData(urlEnd, body) {
+    let url = document.location.origin + "/" + urlEnd;
+    return fetch(url, {
+        body: JSON.stringify(body),
+        method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+    });
+}
+
 
 function init() {
     getData('labels').then( res => res.json()).then( res => {

@@ -18,6 +18,10 @@ function removeClass(list, className) {
 }
 
 export function createLabelTabs( ) {
+    let labelsArr = document.querySelectorAll("aside.sidebar > ul .labels-list-item");
+    for( let label of labelsArr) 
+        label.parentNode.removeChild(label);
+
     let labels = JSON.parse( localStorage.getItem('labels') );
     const fragment = document.createDocumentFragment();
     const ul = document.querySelector("aside.sidebar").childNodes[1];
@@ -26,6 +30,7 @@ export function createLabelTabs( ) {
         const li = document.createElement("li");
         li.setAttribute("data-value", `labels/${label._id}`);
         li.innerHTML = "<i class='fas fa-tag'></i>"
+        li.classList.add("labels-list-item");
 
         const span = document.createElement("span");
         span.innerText = label.labelText;

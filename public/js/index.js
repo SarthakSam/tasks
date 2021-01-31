@@ -3,6 +3,10 @@ import { renderData } from './card.js'
 import { createLabelTabs } from './sidenav.js';
 
 export function getNotes(urlEnd) {
+    if( !urlEnd ) {
+        let location = localStorage.getItem('location');
+        urlEnd = `${ !location? '': location}`;
+    }
     fetch("http://localhost:3000/" + urlEnd)
     .then( res => res.json())
     .then( res => {

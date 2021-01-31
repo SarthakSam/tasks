@@ -87,7 +87,8 @@
     border: 0.7px solid var(--placeholder-text-color);
     padding: 4px 8px;
     border-radius: 20px;
-    font-size: 0.8rem;
+    font-size: 0.7rem;
+    display: inline-block;
     font-weight: 500;
 }
 
@@ -176,7 +177,7 @@
 
 .notes .info-card .labels-menu .labels-list {
     list-style: none;
-    height: 180px;
+    max-height: 180px;
     overflow-y: scroll;
 }
 

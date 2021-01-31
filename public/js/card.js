@@ -1,4 +1,4 @@
-import {patchNote, _deleteNote, postData, patchData } from './index.js';
+import {patchNote, _deleteNote, postData, patchData, deleteData, getNotes } from './index.js';
 import { errorMessage, successMessage } from './message.js';
 
 const infoCardWidth = 300;
@@ -106,6 +106,7 @@ function getLabel(labels=[]) {
 function getReminderElement(reminderInfo) {
     let reminderInfoElem = document.createElement('span');
     reminderInfoElem.classList.add('reminder-info')
+    reminderInfoElem.setAttribute("data-val", reminderInfo._id);
     reminderInfoElem.innerHTML = `<i class="fa fa-retweet" aria-hidden="true"></i>${reminderInfo.date + ", " + reminderInfo.time + ", " + capitalize(reminderInfo.frequency) }<i class = "fa fa-times clearReminder"></i>`
     return reminderInfoElem;
  
@@ -202,9 +203,31 @@ document.addEventListener('click', (event) => {
         else if( event.target.classList.contains("fa-check-square") ) {
 
         }
-       else {
-
-       }
+        else if( event.target.classList.contains("clearLabel") ) {
+            console.log("deleted label info");
+        }
+        else if( event.target.parentElement?.classList.contains("label-info") ) {
+            console.log("label info");
+        }
+        else if( event.target.classList.contains("clearReminder") ) {
+            console.log("deleted reminder info");
+            deleteData(`reminders/${event.target.parentElement.getAttribute("data-val")}`)
+            .then( res => res.json() )
+            .then( res => {
+                successMessage(res.message);
+                getNotes();
+            })
+            .catch( err => {
+                errorMessage(err.message);
+            })
+        }
+        else if( event.target.classList.contains("reminder-info") || event.target.parentElement?.classList.contains("reminder-info")) {
+            console.log("remainer info");
+        }
+        else {
+            let card = event.target.classList.contains("info-card") ? event.target : event.target.parentElement;
+            console.log(card);
+        }
     }
     else {
     }

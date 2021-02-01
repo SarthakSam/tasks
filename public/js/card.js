@@ -1,5 +1,6 @@
 import {patchNote, _deleteNote, postData, patchData, deleteData, getNotes } from './index.js';
 import { errorMessage, successMessage } from './message.js';
+import { router } from './router.js';
 
 const infoCardWidth = 300;
 const totalCardsInRow = 4;
@@ -225,7 +226,7 @@ document.addEventListener('click', (event) => {
         }
         else {
             let card = event.target.classList.contains("info-card") ? event.target : event.target.parentElement;
-            openNotePopup( +card.getAttribute("data-index") );
+            router.navigateTo(`note/${cards[+card.getAttribute("data-index")]._id }`);
         }
     }
     else {
@@ -419,9 +420,4 @@ function deleteNote(card) {
 function archive(card) {
     let index = +card.getAttribute('data-index');
     patchNote(cards[index]._id, 'status',  1 );
-}
-
-function openNotePopup(index) {
-    console.log(index);
-    // window.location.hash = `note`
 }

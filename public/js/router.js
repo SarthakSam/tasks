@@ -1,8 +1,8 @@
 
-import { getData, getNotes } from './index.js';
+import { getNotes } from './index.js';
 import { renderLabels } from './sidenav.js';
 import { renderLabelsPopup } from './labels.js';
-import { openNotePopup } from './card.js'
+import { openNote } from './edit-note.js'
 
 class Router {
     constructor( routes ) {
@@ -48,10 +48,7 @@ class Router {
 let routes = [
     { path: "", action: function() { this.navigateTo('notes') } },
     { path: "notes", action: function() { getNotes("notes"); } },
-    { path: "note/:id", action: function() { 
-        openNotePopup( this.currentLocation.split("/")[1] ); 
-        } 
-    },
+    { path: "note/:id", action: function() { openNote( this.currentLocation.split("/")[1] ); } },
     { path: "reminders", action: function() { getNotes("reminders"); } },
     { path: "labels", action: function() { renderLabelsPopup(); } },
     { path: "labels/:id", action: function() { 

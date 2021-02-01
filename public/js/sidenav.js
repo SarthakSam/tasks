@@ -1,4 +1,4 @@
-import { getNotes, getData } from './index.js';
+import { getData } from './index.js';
 import { warningMessage } from './message.js';
 import { router } from './router.js';
 

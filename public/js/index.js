@@ -2,7 +2,7 @@ import {successMessage, errorMessage, warningMessage} from './message.js';
 import { renderData } from './card.js'
 import { createLabelTabs } from './sidenav.js';
 
-export function getNotes(urlEnd) {
+export function getNotes(urlEnd, action) {
     if( !urlEnd ) {
         let location = localStorage.getItem('location');
         urlEnd = `${ !location? '': location}`;
@@ -14,6 +14,9 @@ export function getNotes(urlEnd) {
             localStorage.setItem('notes', JSON.stringify(res.notes) );
             // renderData( res.notes );
             renderData();
+            if(action) {
+                action();
+            }
         }
         else {
             errorMessage("something went wrong")

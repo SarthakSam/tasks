@@ -8,20 +8,13 @@ labelPopupButton.onclick = () => {
     renderLabelsPopup();
 }
 
-// common functionality
-window.onload = () => {
-    localStorage.setItem('location', document.location.hash.substring(1) );
-    if(window.location.hash == '#labels')
-        renderLabelsPopup();
-}
-
 document.addEventListener('click', (event) => {
     if(event.target.classList.contains("popup-container")) {
         closePopup();
     }
 })
 
-function renderLabelsPopup() {
+export function renderLabelsPopup() {
     const popupBody = document.querySelector("#labels > .popup > .popup-body");
     const popupFooter = document.querySelector("#labels > .popup > .popup-footer");
     popupBody.innerHTML = "<p class='title'> Edit Labels </p>";

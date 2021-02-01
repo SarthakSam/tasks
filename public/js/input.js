@@ -161,46 +161,6 @@ function renderImage(reader, file) {
         return promise;
 }
 
-// function readURL(input) {
-//         if (input.files && input.files.length > 0) {
-//                 renderImages(images.files);
-//                 // var reader = new FileReader();
-//                 // reader.onload = function(e) {
-//                 //         // console.log(e.target.result);
-//                 //         const imageContainer = document.createElement("li");
-//                 //         const image = document.createElement("img");
-//                 //         image.setAttribute('src', e.target.result);
-//                 //         image.classList.add("uploaded-image")
-//                 //         imageContainer.appendChild(image);
-//                 //         uploadedImagesList.append(imageContainer);
-//                 // }
-//                 // const files = Array.prototype.slice.call(input.files);
-//                 // files.forEach( file => {
-//                 //         reader.readAsDataURL(file); // convert to base64 string                        
-//                 // })
-
-//                 // const formData = new FormData();                
-//                 // formData.append('images', input.files[0]);
-
-//                 // fetch(
-//                 //         "http://localhost:3000/note", {
-//                 //                 method: 'POST',
-//                 //                 body: formData,
-//                 //         }
-//                 // ).then( res => res.json()).then( resp => console.log(resp))
-
-//                 // fetch(
-//                 //         "http://localhost:3000/note", {
-//                 //         body: input.files[0],
-//                 //         method: 'POST',
-//                 //         headers: {
-//                 //                 'Content-Type': 'application/x-www-form-urlencoded',
-//                 //                 }
-//                 //         }
-//                 //         ).then( res => res.json()).then( resp => console.log(resp))
-//         }
-// }        
-
 listContainer.addEventListener("keyup", (event) => {
         if( event.target.parentElement == listContainer.lastElementChild && event.target.innerText.length == 1) {
                 addListItem();

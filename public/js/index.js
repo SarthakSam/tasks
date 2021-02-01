@@ -144,12 +144,12 @@ export function deleteData(urlEnd, body) {
 }
 
 
-function init() {
-    getData('labels').then( res => res.json()).then( res => {
-        localStorage.setItem('labels', JSON.stringify( res.labels ) );
-        createLabelTabs();
-    });
-    getNotes("notes");
-}
+// function init() {
+//     getData('labels').then( res => res.json()).then( res => {
+//         localStorage.setItem('labels', JSON.stringify( res.labels ) );
+//         createLabelTabs();
+//     });
+//     getNotes("notes");
+// }
 
-init();
+// init();

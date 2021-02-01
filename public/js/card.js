@@ -210,7 +210,6 @@ document.addEventListener('click', (event) => {
             console.log("label info");
         }
         else if( event.target.classList.contains("clearReminder") ) {
-            console.log("deleted reminder info");
             deleteData(`reminders/${event.target.parentElement.getAttribute("data-val")}`)
             .then( res => res.json() )
             .then( res => {
@@ -226,7 +225,7 @@ document.addEventListener('click', (event) => {
         }
         else {
             let card = event.target.classList.contains("info-card") ? event.target : event.target.parentElement;
-            console.log(card);
+            openNotePopup( +card.getAttribute("data-index") );
         }
     }
     else {
@@ -420,4 +419,9 @@ function deleteNote(card) {
 function archive(card) {
     let index = +card.getAttribute('data-index');
     patchNote(cards[index]._id, 'status',  1 );
+}
+
+function openNotePopup(index) {
+    console.log(index);
+    // window.location.hash = `note`
 }

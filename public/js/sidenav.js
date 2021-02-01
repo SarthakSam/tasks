@@ -1,13 +1,13 @@
-import { getNotes } from './index.js';
+import { getNotes, getData } from './index.js';
+import { warningMessage } from './message.js';
+import { router } from './router.js';
 
 const sideNav = document.querySelector("aside.sidebar ul");
 sideNav.addEventListener('click', (event) => {
     const li = event.target.tagName == 'LI'? event.target : event.target.parentElement;
     removeClass(document.querySelectorAll("aside.sidebar ul li"), "active");
     li.classList.add("active");
-    document.location.hash = li.getAttribute("data-value");
-    localStorage.setItem('location', document.location.hash.substring(1) );
-    getNotes( li.getAttribute("data-value") );
+    router.navigateTo( li.getAttribute("data-value") );
 })
 
 function removeClass(list, className) {
@@ -39,4 +39,26 @@ export function createLabelTabs( ) {
     })
 
     ul.insertBefore(fragment, ul.children[2]);
+}
+
+export function renderLabels() {
+    getData('labels')
+    .then( res => res.json())
+    .then( res => {
+        localStorage.setItem('labels', JSON.stringify( res.labels ) );
+        createLabelTabs();
+        setActiveLabel();
+    })
+    .catch( err => warningMessage(err.message));
+}
+
+function setActiveLabel() {
+    let lis = document.querySelectorAll("aside.sidebar ul li");
+    removeClass(lis, "active");
+    for( let li of lis) {
+        if( li.getAttribute("data-value") == router.currentLocation) {
+            li.classList.add("active");
+            break;
+        }
+    }
 }

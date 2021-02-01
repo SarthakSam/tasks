@@ -1,6 +1,7 @@
 import { getData, postData, deleteData, patchData } from './index.js';
 import { createLabelTabs } from './sidenav.js'
 import { errorMessage, successMessage } from "./message.js";
+import { router } from './router.js';
 
 const labelPopupButton = document.querySelector(".navbar .nav-list .fa-tags");
 
@@ -31,8 +32,12 @@ export function renderLabelsPopup() {
 }
 
 function closePopup() {
-    let location = localStorage.getItem('location');
-    window.location.hash = `#${ !location || location == 'labels'? '': location}`;
+    // let location = localStorage.getItem('location');
+    const popupBody = document.querySelector("#labels > .popup > .popup-body");
+    const popupFooter = document.querySelector("#labels > .popup > .popup-footer");
+    popupBody.innerHTML = popupFooter.innerHTML = "";
+    router.navigateTo(router.currentLocation);
+    // window.location.hash = `#${ !location || location == 'labels'? '': location}`;
 }
 
 function newLabelElement() {

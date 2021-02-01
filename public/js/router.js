@@ -42,6 +42,7 @@ class Router {
 }
 
 let routes = [
+    { path: "", action: function() { this.navigateTo('notes') } },
     { path: "notes", action: function() { getNotes("notes"); } },
     { path: "reminders", action: function() { getNotes("reminders"); } },
     { path: "labels", action: function() { renderLabelsPopup(); } },

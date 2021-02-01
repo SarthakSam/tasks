@@ -6,6 +6,7 @@ import { router } from './router.js';
 const labelPopupButton = document.querySelector(".navbar .nav-list .fa-tags");
 
 labelPopupButton.onclick = () => {
+    router.prevLocation = window.location.hash.substring(1);
     renderLabelsPopup();
 }
 
@@ -36,7 +37,7 @@ function closePopup() {
     const popupBody = document.querySelector("#labels > .popup > .popup-body");
     const popupFooter = document.querySelector("#labels > .popup > .popup-footer");
     popupBody.innerHTML = popupFooter.innerHTML = "";
-    router.navigateTo(router.currentLocation);
+    router.navigateTo(router.prevLocation);
     // window.location.hash = `#${ !location || location == 'labels'? '': location}`;
 }
 

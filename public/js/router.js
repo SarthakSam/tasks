@@ -2,6 +2,7 @@
 import { getData, getNotes } from './index.js';
 import { renderLabels } from './sidenav.js';
 import { renderLabelsPopup } from './labels.js';
+import { openNotePopup } from './card.js'
 
 class Router {
     constructor( routes ) {
@@ -19,7 +20,10 @@ class Router {
     }
 
     action() {
-        let reqdRoutePath = this.currentLocation.split("/");
+        let loc = this.currentLocation.trim();
+        if(loc[loc.length - 1] == '/')
+            loc = loc.substring(0, loc.length - 1);
+        let reqdRoutePath = loc.split("/");
         let reqdRoute = null;
         for(let route of this.routes) {
             let path = route.path.split("/");
@@ -44,6 +48,10 @@ class Router {
 let routes = [
     { path: "", action: function() { this.navigateTo('notes') } },
     { path: "notes", action: function() { getNotes("notes"); } },
+    { path: "note/:id", action: function() { 
+        openNotePopup( this.currentLocation.split("/")[1] ); 
+        } 
+    },
     { path: "reminders", action: function() { getNotes("reminders"); } },
     { path: "labels", action: function() { renderLabelsPopup(); } },
     { path: "labels/:id", action: function() { 

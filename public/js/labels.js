@@ -2,6 +2,7 @@ import { getData, postData, deleteData, patchData } from './index.js';
 import { createLabelTabs } from './sidenav.js'
 import { errorMessage, successMessage } from "./message.js";
 import { router } from './router.js';
+import { closeEditNotePopup } from './edit-note.js';
 
 const labelPopupButton = document.querySelector(".navbar .nav-list .fa-tags");
 
@@ -11,9 +12,13 @@ labelPopupButton.onclick = () => {
 }
 
 document.addEventListener('click', (event) => {
-    if(event.target.classList.contains("popup-container")) {
-        closePopup();
-    }
+    // if(event.target.classList.contains("popup-container")) {
+    //     closeLabelsPopup();
+    // }
+    if(event.target.id == "labels")
+        closeLabelsPopup();
+    else if( event.target.id == "note")
+        closeEditNotePopup();
 })
 
 export function renderLabelsPopup() {
@@ -26,13 +31,13 @@ export function renderLabelsPopup() {
     let button = document.createElement("button");
     button.classList.add('close-popup-btn');
     button.innerHTML = 'Done';
-    button.onclick = closePopup;
+    button.onclick = closeLabelsPopup;
     popupFooter.innerHTML = "";
     popupFooter.appendChild(button);
     
 }
 
-function closePopup() {
+function closeLabelsPopup() {
     // let location = localStorage.getItem('location');
     const popupBody = document.querySelector("#labels > .popup > .popup-body");
     const popupFooter = document.querySelector("#labels > .popup > .popup-footer");

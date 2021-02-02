@@ -1,13 +1,20 @@
-import { getNotes } from './index.js'
+import { getData } from './index.js';
+import { router } from './router.js';
+
+const notePopupVisible = document.querySelector("#note-checkbox");
 
 export function openNote(note) {
-    getNotes("notes", openNotePopup.bind(null, note));
+    getData(`notes/${note}`)
+    .then(res => res.json())
+    .then( res => openNotePopup(res.note));
 }
 
-function openNotePopup(noteId) {
-    let notes = JSON.parse( localStorage.getItem("notes") );
-    let note = notes.filter( note => note._id == noteId )[0];
+function openNotePopup(note) {
     console.log(note);
+    notePopupVisible.checked = true;
+}
 
-    
+export function closeEditNotePopup() {
+    notePopupVisible.checked = false;
+    router.navigateTo(router.prevLocation);
 }

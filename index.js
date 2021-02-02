@@ -79,6 +79,16 @@ app.post('/notes', async (req, res) => {
 
 })
 
+app.get('/notes/:id', (req, res) => {
+    Note.findById(req.params.id)
+    .then( note => {
+        res.send( { status: 200, note });
+    })
+    .catch(err => {
+        res.send( { status: 400, message: "Unable to find note"});
+    });
+});
+
 app.patch('/notes/:id', (req, res) => {
   Note.findByIdAndUpdate(req.params.id, { $set: req.body }, (err, updatedNote) => {
     if(err) {

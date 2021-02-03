@@ -2,7 +2,7 @@ import {patchNote, _deleteNote, postData, patchData, deleteData, getNotes } from
 import { errorMessage, successMessage } from './message.js';
 import { router } from './router.js';
 
-const infoCardWidth = 300;
+const maxCardWidth = 300;
 const totalCardsInRow = 4;
 let totalCardsCurrentlyInArow = 4;
 const verticalMarginBetCards = 10;
@@ -33,7 +33,6 @@ function renderCards() {
         // const div = document.createElement('div');
         // div.innerHTML = task;
         // div.classList.add("info-card");
-        taskDiv.style.width = `${infoCardWidth}px`;
         cardsList.push(taskDiv);
         fragment.appendChild(taskDiv);
     })
@@ -129,16 +128,25 @@ function getCardButtons() {
 
 function adjustCardsToScreenSize(cardsList) {
     let noOfCardsInRow = totalCardsInRow;
+    let infoCardWidth = maxCardWidth;
     let margin = 10;
     const container = document.querySelector('.container main');
     const containerRect = container.getBoundingClientRect();
-    while( noOfCardsInRow * (infoCardWidth + margin) + margin > containerRect.width ) {
-        noOfCardsInRow--;
+    if( containerRect.width <= infoCardWidth ) {
+        infoCardWidth = containerRect.width
+        noOfCardsInRow = 1;
     }
-    let extraSpace = containerRect.width - noOfCardsInRow * (infoCardWidth + margin) - margin;
-    margin += extraSpace/(noOfCardsInRow + 1); 
-    totalCardsCurrentlyInArow = noOfCardsInRow;     
+    else {
+        while( noOfCardsInRow * (infoCardWidth + margin) + margin > containerRect.width ) {
+            noOfCardsInRow--;
+        }
+        let extraSpace = containerRect.width - noOfCardsInRow * (infoCardWidth + margin) - margin;
+        margin += extraSpace/(noOfCardsInRow + 1); 
+        totalCardsCurrentlyInArow = noOfCardsInRow;     
+    }
+
     cardsList.forEach((task, index) => {
+        task.style.width = `${infoCardWidth}px`;
         if(index < noOfCardsInRow) {
             task.style.top = verticalMarginBetCards + verticalMarginBetCards + 'px';
         }

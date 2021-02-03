@@ -80,7 +80,7 @@ app.post('/notes', async (req, res) => {
 })
 
 app.get('/notes/:id', (req, res) => {
-    Note.findById(req.params.id)
+    Note.findById(req.params.id).populate("reminder").populate("labels").exec()
     .then( note => {
         res.send( { status: 200, note });
     })

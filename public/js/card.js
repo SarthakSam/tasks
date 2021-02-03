@@ -225,7 +225,9 @@ document.addEventListener('click', (event) => {
             console.log("remainer info");
         }
         else {
-            let card = event.target.classList.contains("info-card") ? event.target : event.target.parentElement;
+            let card = event.target;
+            while( !card.classList.contains( "info-card" ) )
+                card = card.parentElement;
             router.navigateTo(`note/${cards[+card.getAttribute("data-index")]._id }`);
         }
     }

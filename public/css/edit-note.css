@@ -1,0 +1,119 @@
+#note-checkbox:checked ~ #note {
+    display: block;
+}
+
+#note > .popup {
+    width: 50vw;
+    min-width: 300px;
+    border: 0.5px solid transparent;
+    background-color: #202124;
+    border-color: #5f6368;
+    max-height: 85vh;
+    overflow-y: auto;
+    height: 400px;
+    box-sizing: border-box;
+    color: var(--color);
+    padding: 10px;
+    border-radius: 5px;
+    font-size: 1.3rem;
+}
+
+#note > .popup > .popup-header .list-icon-right {
+    float: right;
+    margin-right: 20px;
+    padding: 0 5px;
+    display: block;
+    color: var(--icons-color);
+    font-size: 1.5rem;
+    /* font-size: 2rem; */
+}
+
+.active {
+    color: white !important;
+}
+
+
+#note > .popup > .popup-header > p {
+    margin: 10px 15px;
+    outline: none;
+}
+
+#note > .popup > .popup-body > p {
+    margin: 10px 15px;
+    outline: none;
+    font-size: 1.1rem;
+    font-weight: 300;
+}
+
+/* #note > .popup > .popup-body > p.description {
+    display: none;
+} */
+
+#note > .popup > .popup-header p.title:empty::before {
+    content: "Title";
+    /* width: 200px; */
+    color: var(--placeholder-text-color);
+}
+
+#note > .popup > .popup-body p.description:empty::before {
+        content: "Take a note...";
+        color: var(--placeholder-text-color);
+}
+
+#note > .popup > .popup-body ul.input-list {
+    /* display: none; */
+    margin: 15px 0;
+    font-size: 1.2rem;
+    list-style: none;
+}
+
+#note > .popup > .popup-body ul.input-list li.list-item i.fa-plus {
+    color: var(--placeholder-text-color);
+    font-size: 1rem;
+    float: left;
+    margin: 0 10px 0 20px;  
+    padding: 5px 0;
+}
+
+#note > .popup > .popup-body ul.input-list li.list-item  p {
+    /* display: inline-block; */
+    padding: 0 0 5px 40px;
+}
+
+#note > .popup > .popup-body ul.input-list li.list-item  p:empty::before{
+    content: "List item";
+    color: var(--placeholder-text-color);
+}
+
+#note > .popup > .popup-body  div.images-section {
+    margin: 10px;
+}
+
+#note > .popup > .popup-body  div.images-section form {
+    text-align: center;
+}
+
+#note > .popup > .popup-body  div.images-section form > label.upload-btn {
+    font-size: 2rem;
+    display: none;
+}
+
+#note > .popup > .popup-body  div.images-section ul.uploaded-images-list {
+    display: flex;
+    flex-wrap: wrap;
+    list-style: none;
+}
+
+#note > .popup > .popup-body  div.images-section ul.uploaded-images-list li {
+    padding: 10px;
+    border: 1px solid var(--placeholder-text-color);
+    margin: 10px;
+}
+
+#note > .popup > .popup-body  div.images-section ul.uploaded-images-list li img.uploaded-image {
+    width: 300px;
+    height: 200px;
+}
+
+
+

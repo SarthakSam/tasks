@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="./css/inputHeader.css">
     <link rel="stylesheet" href="./css/message.css">
     <link rel="stylesheet" href="./css/labels.css">
+    <link rel="stylesheet" href="./css/edit-note.css">
 </head>
 <body>
     <input type="checkbox" id="sidebar-btn" checked>
@@ -156,7 +157,7 @@
         </header>
         <main class="notes">
 
-        </main> -->
+        </main>
     </section>
     <script type="module" src="./js/card.js"></script>
     <script type="module" src="./js/sidenav.js"></script>
@@ -176,8 +177,86 @@
     <input type="checkbox" id="note-checkbox">
     <div class="popup-container" id="note">
         <div class="popup">
-            <div class="popup-body"></div>
-            <div class="popup-footer"></div>
+            <div class="popup-header">
+                <i class="fas fa-thumbtack list-icon-right" data-value="pin"></i>
+                <p contenteditable class="title"></p>
+            </div>
+            <div class="popup-body">
+                <p contenteditable class="description"></p>
+                <ul class="input-list">
+                </ul>
+                <div class="images-section">
+                    <ul class="uploaded-images-list">
+                    </ul>
+                    <form>
+                        <input type="file" name="filename" style = "display: none;" accept="image/*" multiple> 
+                        <label for="myFile" class="upload-btn"><i class="fa fa-plus"></i></label>
+                        <!-- <button type="button">Upload</button> -->
+                      </form>        
+                </div>
+                <div class="reminder-collaborator-label-info-section">
+                    
+                </div>
+            </div>
+            <div class="popup-footer">
+                <!-- <div class="buttons-tray">
+                    <ul class="buttons-list">
+                        <li class="reminder-btn">
+                            <i data-value="reminder" class="far fa-bell" title="Reminder"></i>  
+                            <div class="reminder-form-container">
+                                <p>Select date and time</p>
+                                <form class="reminder-form">
+                                    <input type="date" name="date"><br>
+                                    <input type="time" name="time" value="20:00"><br>
+                                    <select name="frequency">
+                                        <option value="repeats daily">Repeats daily</option>
+                                        <option value="repeats weekly">Repeats weekly</option>
+                                        <option value="repeats monthly">Repeats monthly</option>
+                                        <option value="repeats yearly">Repeats yearly</option>
+                                        <option value="doesn't repeat">Doesn't repeat</option>
+                                    </select>
+                                    <button class="btn-right" type="submit">Save</button>
+                                </form>
+                            </div>
+                        </li>
+                        <li>
+                            <i data-value="addUser" class="fas fa-user-plus" title="Add User"></i>  
+                        </li>
+                        <li class="color-btn">
+                            <i data-value="changeColor" class="fas fa-palette" title="Change Color"></i>  
+                            <ul class="color-palette">
+                                <li class="color" style="border: 1px solid white"></li>
+                                <li class="color" style="background: orange"></li>
+                                <li class="color" style="background: green"></li>
+                                <li class="color" style="background: #1E3A8A"></li>
+                                <li class="color" style="background: #B91C1C"></li>
+                                <li class="color" style="background: #F87171"></li>
+                                <li class="color" style="background: #B45309"></li>
+                                <li class="color" style="background: purple"></li>
+                                <li class="color" style="background: #831843"></li>
+                                <li class="color" style="background: #4C1D95"></li>
+                                <li class="color" style="background: #047857"></li>
+                                <li class="color" style="background: white"></li>
+                        </ul>
+                        </li>
+                        <li>
+                            <i data-value="addImage" class="far fa-image" title="Add Image"></i>
+                        </li>
+                        <li>
+                            <i data-value="addList" class="fa fa-check-square" aria-hidden="true" title="Add List"></i>
+                        </li>
+                        <li>
+                            <i data-value="showOptions" class="fas fa-ellipsis-v"></i>
+                        </li>
+                    </ul>
+                    <div style="float: right;">
+                        <button class="btn-right addNote-btn">Add</button>
+                        <button class="btn-right close-input-tab">Close</button>
+                    </div>
+                    
+                </div> -->
+
+            </div>
         </div>
     </div>
 

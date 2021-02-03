@@ -1,6 +1,7 @@
 import {successMessage, errorMessage, warningMessage} from './message.js';
 import { renderData } from './card.js'
 import { createLabelTabs } from './sidenav.js';
+import { router } from './router.js';
 
 export function getNotes(urlEnd, action) {
     if( !urlEnd ) {
@@ -46,7 +47,7 @@ export function saveNote(note) {
     ).then( res => res.json())
     .then( res => {
         if(res.status == 200) {
-            init();
+            router.navigateTo(router.prevLocation);
             successMessage("Note saved successfully");
         }
         else {
@@ -72,7 +73,7 @@ export function patchNote(id, property, value) {
     ).then( res => res.json())
     .then( res => {
         if(res.status == 200) {
-            init();
+            router.navigateTo(router.prevLocation);
             successMessage("Note updated successfully");
         }
         else {
@@ -95,7 +96,7 @@ export function _deleteNote(id) {
     ).then( res => res.json())
     .then( res => {
         if(res.status == 200) {
-            init();
+            router.navigateTo(router.prevLocation);
             successMessage("Note deleted successfully");
         }
         else {

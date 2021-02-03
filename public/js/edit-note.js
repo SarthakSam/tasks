@@ -66,11 +66,28 @@ function openNotePopup(note) {
         imagesElem.style.display = "none";
     }
 
-    
-    console.log(note);
-    console.log(popupHeader);
+    let labelInfoElem = null;
+    for(let elem of popupBody.children)
+        if(elem.classList.contains("label-info-container")) {
+            labelInfoElem = elem;
+            break;    
+        }
+
+    if( note.labels && note.labels.length > 0) {
+        note.labels.forEach( label => {
+            labelInfoElem.appendChild( getLabelElement(label) );
+        });
+        // labelInfoElem.style.display = "initial";
+    }
+    else {
+        labelInfoElem.style.display = "none";
+    }
+
+    if(note.reminder && note.reminder.date)
+        popupBody.insertBefore( getReminderElement( note.reminder ), labelInfoElem );
+    // console.log(note);
     console.log(popupBody);
-    console.log(popupFooter);
+    // console.log(popupFooter);
 }
 
 function addListItem() {
@@ -86,8 +103,44 @@ function addListItem() {
     return li;
 }
 
+function getReminderElement(reminderInfo) {
+    let reminderInfoElem = document.createElement('span');
+    reminderInfoElem.classList.add('reminder-info')
+    reminderInfoElem.setAttribute("data-val", reminderInfo._id);
+    reminderInfoElem.innerHTML = `<i class="fa fa-retweet" aria-hidden="true"></i>${reminderInfo.date + ", " + reminderInfo.time + ", " + capitalize(reminderInfo.frequency) }<i class = "fa fa-times clearReminder"></i>`
+    return reminderInfoElem;
+}
+
+function getLabelElement( label ) {
+    let labelInfoElem = document.createElement('div');
+    labelInfoElem.classList.add('label-info')
+    labelInfoElem.innerHTML = `<span> ${label.labelText} </span><i class = "fa fa-times clearLabel"></i>`
+    return labelInfoElem;
+}
 
 export function closeEditNotePopup() {
     notePopupVisible.checked = false;
+
+    popupHeader.firstElementChild.classList.remove("active");
+    popupHeader.firstElementChild.setAttribute("data-value", "pin");
+    popupHeader.lastElementChild.innerHTML = "";
+
+    for(let child of popupBody.children ) {
+        if( child.classList.contains("images-section") ) {
+            child.firstElementChild.innerHTML = "";
+        }
+        else {
+            child.innerHTML = "";
+        }
+    } 
+
+    let reminderInfo = document.querySelector(".popup-body .reminder-info");
+    if(reminderInfo)
+        popupBody.removeChild(reminderInfo)
+
     router.navigateTo(router.prevLocation);
+}
+
+function capitalize(string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
 }

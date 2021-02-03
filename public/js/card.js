@@ -110,7 +110,6 @@ function getReminderElement(reminderInfo) {
     reminderInfoElem.setAttribute("data-val", reminderInfo._id);
     reminderInfoElem.innerHTML = `<i class="fa fa-retweet" aria-hidden="true"></i>${reminderInfo.date + ", " + reminderInfo.time + ", " + capitalize(reminderInfo.frequency) }<i class = "fa fa-times clearReminder"></i>`
     return reminderInfoElem;
- 
 }
 
 function getCardButtons() {

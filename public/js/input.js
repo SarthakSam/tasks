@@ -1,6 +1,7 @@
 import Note from './note.js';
 import {saveNote} from './index.js';
 import {successMessage, errorMessage, warningMessage} from './message.js';
+import { renderImages } from './image-upload.js';
 
 const inputHeader = document.querySelector("section.container header.input-header");
 const inputBtn = document.querySelector("section.container header.input-header .input-tab-btn");
@@ -75,7 +76,7 @@ document.addEventListener('click', (event) => {
 function resetReminder() {
         reminderForm.elements.date.value = "";
         reminderForm.elements.time.value = "20:00";
-        reminderForm.elements.frequency.value = "daily";
+        reminderForm.elements.frequency.value = "repeats daily";
         const reminderInfo = document.querySelector(" section.container header.input-header .input-tab div.reminder-collaborator-label-info-section span.reminder-info");
         if(reminderInfo)
         reminderAndColloboratorSection.removeChild(reminderInfo);
@@ -132,33 +133,9 @@ function addDescription() {
 
 uploadBtn.onchange = (event) => {
         if(event.target.files && event.target.files.length > 0) {
-                renderImages(event.target.files);
+                renderImages(event.target.files, uploadedImagesList);
         }
         // readURL(event.target)
-}
-
-async function renderImages(files) {
-        var reader = new FileReader();
-        files = Array.prototype.slice.call(files);
-        for( const file of files)
-                await renderImage(reader, file);
-}
-
-function renderImage(reader, file) {
-        let promise = new Promise( (resolve, reject) => {
-                reader.onload = function(e) {
-                        // console.log(e.target.result);
-                        const imageContainer = document.createElement("li");
-                        const image = document.createElement("img");
-                        image.setAttribute('src', e.target.result);
-                        image.classList.add("uploaded-image")
-                        imageContainer.appendChild(image);
-                        uploadedImagesList.append(imageContainer);
-                        resolve();
-                        }
-        })
-        reader.readAsDataURL(file);
-        return promise;
 }
 
 listContainer.addEventListener("keyup", (event) => {

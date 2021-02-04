@@ -166,6 +166,7 @@
     <script type="module" src="./js/labels.js"></script>
     <script type="module" src="./js/router.js"></script>
     <script type="module" src="./js/edit-note.js"></script>
+    <script type="module" src="./js/image-upload.js"></script>
     
     <div class="popup-container" id="labels">
         <div class="popup">
@@ -189,8 +190,8 @@
                     <ul class="uploaded-images-list">
                     </ul>
                     <form>
-                        <input type="file" name="filename" style = "display: none;" accept="image/*" multiple> 
-                        <label for="myFile" class="upload-btn"><i class="fa fa-plus"></i></label>
+                        <input type="file" id = "uploaded-file" name="filename" style = "display: none;" accept="image/*" multiple> 
+                        <label for="uploaded-file" class="upload-btn"><i class="fa fa-plus"></i></label>
                         <!-- <button type="button">Upload</button> -->
                       </form>        
                 </div>
@@ -199,12 +200,12 @@
                 </div>
             </div>
             <div class="popup-footer">
-                <!-- <div class="buttons-tray">
+                <div class="buttons-tray">
                     <ul class="buttons-list">
                         <li class="reminder-btn">
                             <i data-value="reminder" class="far fa-bell" title="Reminder"></i>  
                             <div class="reminder-form-container">
-                                <p>Select date and time</p>
+                                <p>Select date and time <i class="fas fa-times close-reminder-btn"></i> </p>
                                 <form class="reminder-form">
                                     <input type="date" name="date"><br>
                                     <input type="time" name="time" value="20:00"><br>
@@ -223,7 +224,7 @@
                             <i data-value="addUser" class="fas fa-user-plus" title="Add User"></i>  
                         </li>
                         <li class="color-btn">
-                            <i data-value="changeColor" class="fas fa-palette" title="Change Color"></i>  
+                            <i class="fas fa-palette" title="Change Color"></i>  
                             <ul class="color-palette">
                                 <li class="color" style="border: 1px solid white"></li>
                                 <li class="color" style="background: orange"></li>
@@ -248,13 +249,12 @@
                         <li>
                             <i data-value="showOptions" class="fas fa-ellipsis-v"></i>
                         </li>
+                        <div style="float: right;">
+                            <button class="btn-right saveNote-btn">Save</button>
+                            <button class="btn-right close-input-tab">Close</button>
+                        </div>
                     </ul>
-                    <div style="float: right;">
-                        <button class="btn-right addNote-btn">Add</button>
-                        <button class="btn-right close-input-tab">Close</button>
-                    </div>
-                    
-                </div> -->
+                </div>
 
             </div>
         </div>
